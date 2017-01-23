@@ -10,7 +10,7 @@ echo2 "Executing tests and generating results"
 
 rm -rf "$LOCAL_RESULTS"
 mkdir -p "$LOCAL_RESULTS" && touch "$LOCAL_RESULTS/results.json"
-docker run -it --rm -v "$LOCAL_UPLOADS":/uploads -v "$TM_SETTINGS":/conf.py:ro -v "$LOCAL_RESULTS/results.json":/results.json tmtest $cmd
+docker run -it --rm -v "$LOCAL_UPLOADS":/uploads -v "$TM_SETTINGS":/conf.py:ro -v "$LOCAL_RESULTS/results.json":/results.json scythe/tmtest $cmd
 
 echo2 "Opening the viewer"
 
