@@ -1,9 +1,9 @@
-confs/*.py
-dirs/
+confs
+dirs
 scythe/bin/sf
 scythe/bin/tm
 scythe/bin/zv
+scythe/.support_tools_cache
 local/
 .ipynb_checkpoints
 *.ipynb
-scythe/.support_tools_cache
