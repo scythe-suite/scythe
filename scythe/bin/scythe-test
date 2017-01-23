@@ -1,10 +1,10 @@
 echo1 "Runnig the test cycle"
 
-# if [ -z "$2" ]; then
-#     cmd=""
-# else
-#     cmd="tmtest -c /conf.py -u /uploads -r /results.json"
-# fi
+if [ -z "$1" ]; then
+    cmd=""
+else
+    cmd="tmtest -c /conf.py -u /uploads -r /results.json"
+fi
 
 echo2 "Executing tests and generating results"
 
