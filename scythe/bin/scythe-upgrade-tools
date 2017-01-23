@@ -1,0 +1,21 @@
+mkdir -p "$SCYTHE_HOME/.support_tools_cache"
+(
+cd "$SCYTHE_HOME/.support_tools_cache"
+for repo in tristo-mietitore sim-fun-i zerve; do
+    if [ ! -d $repo ]; then
+        echo1 "Cloning $repo"
+        git clone https://github.com/mapio/$repo.git
+    else
+        echo1 "Updating $repo"
+        (cd $repo && git pull)
+    fi
+done
+echo1 "Packaging tristo-mietitore"
+( cd tristo-mietitore && ./bin/mkdist && cp -f ./bin/tm "$SCYTHE_HOME/bin/tm" )
+echo1 "Packaging sim-fun-i"
+( cd sim-fun-i && ./bin/mkdist && cp -f ./bin/sf "$SCYTHE_HOME/bin/sf" )
+echo1 "Packaging zserve"
+( cd zerve && ./make_zerve "$SCYTHE_HOME/viewer" && cp -f ./zerve "$SCYTHE_HOME/bin/zv" )
+echo1 "Installed tools"
+( cd "$SCYTHE_HOME/bin/" && ls -l {tm,sf,zv} )
+)

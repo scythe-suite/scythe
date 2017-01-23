@@ -1,0 +1,8 @@
+#!/bin/bash
+
+export SFLAB="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
+source "$SCYTHE_HOME/../confs/confs.sh" "$1"
+
+echo1 "Opening the results viewer"
+
+zv results.json:"$LOCAL_RESULTS/results.json"

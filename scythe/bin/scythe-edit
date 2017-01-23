@@ -1,0 +1,3 @@
+echo1 "Opening exercises texts in current editor ($EDITOR)"
+
+$EDITOR $(for e in $(tail -n +2 "$EXERCISES" | tac); do echo "$EXERCISES_REPO/$e/Testo.md"; done)

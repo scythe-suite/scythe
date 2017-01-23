@@ -1,0 +1,61 @@
+echo1 "Preparing configuration"
+
+tempdir=$(mktemp -d /tmp/sf-XXXXXXXXX) || exit 1
+
+echo2 "Preparing TM tar directoroy"
+
+echo3 "Adding exercises, making outputs"
+
+mkdir "$tempdir/bundle"
+n=1
+for e in $(tail -n +2 "$EXERCISES"); do
+	echo3 "$e"
+	dst=$(printf '%s/bundle/%02d-%s' "$tempdir" $n "$e")
+	mkdir "$dst"
+	cp "$EXERCISES_REPO/$e"/Testo.md "$dst"
+	sf generate -fs "$EXERCISES_REPO/$e" -o "$dst"
+	n=$(( n + 1 ))
+done
+
+echo3 "Adding readme and bins"
+
+cp "$BASE_BUNDLE/LEGGIMI.md" "$tempdir/bundle/LEGGIMI.md"
+mkdir "$tempdir/bundle/bin"
+cp "$BASE_BUNDLE/bin/"{consegna,identifica,aggiorna,soluzione,verifica,pulisci} "$tempdir/bundle/bin"
+cp "$SCYTHE_HOME/bin/sf" "$tempdir/bundle/bin/.sf"
+
+echo3 "Fixing perms"
+
+chmod -R u+rX-w,go= "$tempdir/bundle"
+chmod -R u+rx "$tempdir/bundle/bin"
+find "$tempdir/bundle" -name \*-\* -type d -exec chmod u+w {} \;
+
+echo2 "Generating the TM configuration file (base + tar + uids)"
+
+secret=$(head -n 1 "$EXERCISES")
+if [ -z "$secret" ]; then
+	secret=$(python -c 'import uuid; print uuid.uuid4()')
+	echo3 "generated new secret $secret"
+else
+	echo3 "using secret $secret"
+fi
+
+cat > "$tempdir/conf.py" <<EOF
+SECRET_KEY = '$secret'
+MAX_CONTENT_LENGTH = 16 * 1024 * 1024
+LANG = 'it'
+HOME = '\$HOME'
+
+CLIENT_PATH = '### home ###/bin/.tm'
+
+ENVIRONMENT_SETUP = """
+export PATH="\$HOME/bin:\$PATH"
+"""
+EOF
+
+filter='^(bin/.*|LEGGIMI\.md|[0-9]+-.+/(Testo\.md|((input|output|args)-[0-9]+)\.txt))$'
+tm mkconf -vf "$filter" -b "$tempdir/conf.py" -u "<REPLACEME>" -r "$REGISTERED_UIDS" "$tempdir/bundle" "$TM_SETTINGS"
+
+echo2 "Cleanup temp dir"
+
+chmod -R u+rwx $tempdir; rm -rf $tempdir

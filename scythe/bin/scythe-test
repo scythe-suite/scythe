@@ -1,0 +1,17 @@
+echo1 "Runnig the test cycle"
+
+# if [ -z "$2" ]; then
+#     cmd=""
+# else
+#     cmd="tmtest -c /conf.py -u /uploads -r /results.json"
+# fi
+
+echo2 "Executing tests and generating results"
+
+rm -rf "$LOCAL_RESULTS"
+mkdir -p "$LOCAL_RESULTS" && touch "$LOCAL_RESULTS/results.json"
+docker run -it --rm -v "$LOCAL_UPLOADS":/uploads -v "$TM_SETTINGS":/conf.py:ro -v "$LOCAL_RESULTS/results.json":/results.json tmtest $cmd
+
+echo2 "Opening the viewer"
+
+zv results.json:"$LOCAL_RESULTS/results.json"
