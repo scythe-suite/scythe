@@ -1,6 +1,13 @@
 #!/bin/bash
 
+echo1() { echo -e "\033[34m*** $@...\033[0m"; }
+echo2() { echo -e "\033[31m** $@...\033[0m"; }
+echo3() { echo -e "\033[32m* $@...\033[0m"; }
+
 export SCYTHE_HOME="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
+export PYTHONPATH="$SCYTHE_HOME/bin/tm:$SCYTHE_HOME/bin/cu"
+export PATH="$SCYTHE_HOME/bin:$PATH"
+
 
 if [ -z "$1" ]; then
 	echo "shythe: available commands: $(ls -1 "$SCYTHE_HOME/bin/scythe-"* | sed 's/.*\/bin\/scythe-\(.*\)/\1/g' | paste -s -d' ' -)" 2>&1
@@ -10,6 +17,10 @@ SCYTHE_CMD="$SCYTHE_HOME/bin/scythe-$1"
 if [ ! -r "$SCYTHE_CMD" ]; then
 	echo "shyte: command '$1' not found!" >&2
 	exit 1
+fi
+if [ "$1" == "init" ]; then
+	source "$SCYTHE_CMD"
+	exit 0
 fi
 shift
 
@@ -21,11 +32,6 @@ SCYTHE_CONF="$1"
 shift
 
 source "$SCYTHE_HOME/../confs/confs.sh"
-
-echo1() { echo -e "\033[34m*** $@...\033[0m"; }
-echo2() { echo -e "\033[31m** $@...\033[0m"; }
-echo3() { echo -e "\033[32m* $@...\033[0m"; }
-
 if [ ! -r "$EXERCISES" ]; then
 	echo "shythe: exercises list "$EXERCISES" not readable!" 2>&1
 	exit 1

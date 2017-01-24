@@ -14,4 +14,4 @@ docker run -it --rm -v "$LOCAL_UPLOADS":/uploads -v "$TM_SETTINGS":/conf.py:ro -
 
 echo2 "Opening the viewer"
 
-zv results.json:"$LOCAL_RESULTS/results.json"
+sv results.json:"$LOCAL_RESULTS/results.json"

@@ -1,0 +1,23 @@
+mkdir -p "$SCYTHE_HOME/.support_tools_cache"
+
+echo1 "Installing tristo-mietitore"
+curl -sL https://github.com/scythe-suite/tristo-mietitore/releases/download/v0.2.3/tm > "$SCYTHE_HOME/bin/tm"
+chmod u+x  "$SCYTHE_HOME/bin/tm"
+
+echo1 "Installing sim-fun-i"
+curl -sL https://github.com/scythe-suite/sim-fun-i/releases/download/v0.1.24/sf > "$SCYTHE_HOME/bin/sf"
+chmod u+x  "$SCYTHE_HOME/bin/sf"
+
+echo1 "Installing scythe-viewer"
+curl -sL https://github.com/scythe-suite/scythe-viewer/releases/download/v0.1.1/sv > "$SCYTHE_HOME/bin/sv"
+chmod u+x  "$SCYTHE_HOME/bin/sv"
+
+echo1 "Creating 'scythe/tmtest' docker image"
+(
+mkdir -p "$SCYTHE_HOME/../.docker"
+cp "$SCYTHE_HOME/Dockerfile" "$SCYTHE_HOME/../.docker"
+cp "$SCYTHE_HOME/bin/tm" "$SCYTHE_HOME/../.docker"
+cp "$SCYTHE_HOME/bin/tm" "$SCYTHE_HOME/../.docker"
+cd "$SCYTHE_HOME/../.docker"
+docker build -t scythe/tmtest .
+)

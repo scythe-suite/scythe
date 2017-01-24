@@ -13,7 +13,7 @@ for e in $(tail -n +2 "$EXERCISES"); do
 	dst=$(printf '%s/bundle/%02d-%s' "$tempdir" $n "$e")
 	mkdir "$dst"
 	cp "$EXERCISES_REPO/$e"/Testo.md "$dst"
-	sf generate -fs "$EXERCISES_REPO/$e" -o "$dst"
+	sf generate -t 2 -fs "$EXERCISES_REPO/$e" -o "$dst"
 	n=$(( n + 1 ))
 done
 
