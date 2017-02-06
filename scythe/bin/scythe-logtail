@@ -1,0 +1,3 @@
+echo1 "Remote logs..."
+
+ssh "$REMOTE_HOST" "$REMOTE_LOGTAIL_COMMAND"

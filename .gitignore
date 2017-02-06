@@ -1,7 +1,8 @@
 local
 confs
 dirs
-scythe/bin/sf
+scythe/bin/md2html
 scythe/bin/tm
+scythe/bin/sf
 scythe/bin/sv
 .docker

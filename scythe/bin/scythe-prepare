@@ -12,14 +12,14 @@ for e in $(tail -n +2 "$EXERCISES"); do
 	echo3 "$e"
 	dst=$(printf '%s/bundle/%02d-%s' "$tempdir" $n "$e")
 	mkdir "$dst"
-	cp "$EXERCISES_REPO/$e"/Testo.md "$dst"
+	md2html "$EXERCISES_REPO/$e/Testo.md" "$e" "$dst/Testo.html"
 	sf generate -t 2 -fs "$EXERCISES_REPO/$e" -o "$dst"
 	n=$(( n + 1 ))
 done
 
 echo3 "Adding readme and bins"
 
-cp "$BASE_BUNDLE/LEGGIMI.md" "$tempdir/bundle/LEGGIMI.md"
+md2html "$BASE_BUNDLE/LEGGIMI.md" LEGGIMI "$tempdir/bundle/LEGGIMI.html"
 mkdir "$tempdir/bundle/bin"
 cp "$BASE_BUNDLE/bin/"{consegna,identifica,aggiorna,soluzione,verifica,pulisci} "$tempdir/bundle/bin"
 cp "$SCYTHE_HOME/bin/sf" "$tempdir/bundle/bin/.sf"
@@ -53,7 +53,7 @@ export PATH="\$HOME/bin:\$PATH"
 """
 EOF
 
-filter='^(bin/.*|LEGGIMI\.md|[0-9]+-.+/(Testo\.md|((input|output|args)-[0-9]+)\.txt))$'
+filter='^(bin/.*|LEGGIMI\.html|[0-9]+-.+/(Testo\.html|((input|output|args)-[0-9]+)\.txt))$'
 tm mkconf -vf "$filter" -b "$tempdir/conf.py" -u "<REPLACEME>" -r "$REGISTERED_UIDS" "$tempdir/bundle" "$TM_SETTINGS"
 
 echo2 "Cleanup temp dir"
