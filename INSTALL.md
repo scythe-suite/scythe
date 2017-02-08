@@ -7,10 +7,10 @@ First of all clone this repo with
 Now set the path and install the required dependencies
 
     . ./setpath.sh
-    scythe upgrade-tools
+    scythe init
 
-this will clone `tristo-mietitore`, `sim-fun-i` and `scythe-viewer` and compile
-them (vendorizing the required dependencies).
+this will download the latest releases of `tristo-mietitore`, `sim-fun-i`,
+`scythe-viewer` and `md2html`.
 
 Now you need to setup configurations; you can start from an example repo
 
@@ -20,13 +20,17 @@ Now edit `confs/confs.sh` replacing `santini` with your name in line
 
     DEFAULT_TEACHER_ID="santini"
 
+Note that if you want to keep track of your conigurations in a repo, you'll need
+to change the remote (you will not be allowed to push to `mapio/scythe-confs-labprog`).
+
 Make a directory named `./dirs` and add a subdirectory named `./dirs/exercises`
 containing exercises, for instance, cloning
 
     cd ./dirs
     git clone git@github.com:mapio/labprog-infomus-esercizi.git exercises
 
-It should be all set now.
+It should be all set now. Again, if you want to edit and keep track of your exercises
+you'll need to change the remote (you will not be allowed to push to `mapio/labprog-infomus-esercizi` either).
 
 ## Use
 
