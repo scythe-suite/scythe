@@ -1,16 +1,22 @@
 echo1 "Runnig the test cycle"
 
 if [ -z "$1" ]; then
-    cmd=""
+    docker_cmd=""
+    local_cmd="-n"
 else
-    cmd="tmtest -c /conf.py -u /uploads -r /results.json"
+    docker_cmd="tmtest -c /conf.py -u /uploads -r /results.json"
+    local_cmd=""
 fi
 
 echo2 "Executing tests and generating results"
 
 rm -rf "$LOCAL_RESULTS"
 mkdir -p "$LOCAL_RESULTS" && touch "$LOCAL_RESULTS/results.json"
-docker run -it --rm -v "$LOCAL_UPLOADS":/uploads -v "$TM_SETTINGS":/conf.py:ro -v "$LOCAL_RESULTS/results.json":/results.json scythe/tmtest $cmd
+if [ -z "$SCYTHE_USE_SANDBOX" ]; then
+    sf tmtest $local_cmd -c "$TM_SETTINGS" -u "$LOCAL_UPLOADS" -r "$LOCAL_RESULTS/results.json"
+else
+    docker run -it --rm -v "$LOCAL_UPLOADS":/uploads -v "$TM_SETTINGS":/conf.py:ro -v "$LOCAL_RESULTS/results.json":/results.json scythe/tmtest $docker_cmd
+fi
 
 echo2 "Opening the viewer"
 

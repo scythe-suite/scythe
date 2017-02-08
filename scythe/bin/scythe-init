@@ -16,12 +16,14 @@ echo1 "Installing md2html"
 curl -sL https://github.com/scythe-suite/md2html/releases/download/v0.2/md2html > "$SCYTHE_HOME/bin/md2html"
 chmod u+x  "$SCYTHE_HOME/bin/md2html"
 
-echo1 "Creating 'scythe/tmtest' docker image"
-(
-mkdir -p "$SCYTHE_HOME/../.docker"
-cp "$SCYTHE_HOME/Dockerfile" "$SCYTHE_HOME/../.docker"
-cp "$SCYTHE_HOME/bin/tm" "$SCYTHE_HOME/../.docker"
-cp "$SCYTHE_HOME/bin/sf" "$SCYTHE_HOME/../.docker"
-cd "$SCYTHE_HOME/../.docker"
-docker build -t scythe/tmtest .
-)
+if [ ! -z $SCYTHE_USE_SANDBOX ]; then
+    echo1 "Creating 'scythe/tmtest' docker image"
+    (
+    mkdir -p "$SCYTHE_HOME/../.docker"
+    cp "$SCYTHE_HOME/Dockerfile" "$SCYTHE_HOME/../.docker"
+    cp "$SCYTHE_HOME/bin/tm" "$SCYTHE_HOME/../.docker"
+    cp "$SCYTHE_HOME/bin/sf" "$SCYTHE_HOME/../.docker"
+    cd "$SCYTHE_HOME/../.docker"
+    docker build -t scythe/tmtest .
+    )
+fi
