@@ -6,3 +6,4 @@ scythe/bin/tm
 scythe/bin/sf
 scythe/bin/sv
 .docker
+.envrc
