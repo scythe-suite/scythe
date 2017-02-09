@@ -1,8 +1,7 @@
 # Installation instructions
 
-Download `scythe.zip`, `exercises.zip`, and `confs.zip` from
-
-    https://github.com/scythe-suite/scythe/releases
+Download `scythe.zip`, `exercises.zip`, and `confs.zip` from [this project
+releases](https://github.com/scythe-suite/scythe/releases).
 
 Create an empty dir that we'll call the **base dir** and unzip the first archive
 in it; every time you'll need to use this tool, just go where to the *base dir*

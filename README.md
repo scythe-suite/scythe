@@ -5,3 +5,5 @@ A suite of tools based on
 [sim-fun-i](https://github.com/mapio/sim-fun-i), and
 [zerve](https://github.com/mapio/zerve) to distribute, collect and evaluate
 programming exercieses.
+
+To use the tool follow the [INSTALL](INSTALL.md) instructions.
