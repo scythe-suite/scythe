@@ -1,4 +1,4 @@
 echo1 "Getting uploads from remote dir"
 
-mkdir -p "$LOCAL_UPLOADS"
-rsync -zPa "$REMOTE_USER@$REMOTE_HOST:$REMOTE_UPLOADS/" "$LOCAL_UPLOADS"
+mkdir -p "$HARVEST/uploads"
+rsync -zPa "$REMOTE_USER@$REMOTE_HOST:$REMOTE_UPLOADS/" "$HARVEST/uploads"

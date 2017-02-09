@@ -10,14 +10,13 @@ fi
 
 echo2 "Executing tests and generating results"
 
-rm -rf "$LOCAL_RESULTS"
-mkdir -p "$LOCAL_RESULTS" && touch "$LOCAL_RESULTS/results.json"
+mkdir -p "$HARVEST"
 if [ -z "$SCYTHE_USE_SANDBOX" ]; then
-    sf tmtest $local_cmd -c "$TM_SETTINGS" -u "$LOCAL_UPLOADS" -r "$LOCAL_RESULTS/results.json"
+    sf tmtest $local_cmd -c "$TM_SETTINGS" -u "$HARVEST/uploads" -r "$HARVEST/results.json"
 else
-    docker run -it --rm -v "$LOCAL_UPLOADS":/uploads -v "$TM_SETTINGS":/conf.py:ro -v "$LOCAL_RESULTS/results.json":/results.json scythe/tmtest $docker_cmd
+    docker run -it --rm -v "$HARVEST/uploads":/uploads -v "$TM_SETTINGS":/conf.py:ro -v "$HARVEST/results.json":/results.json scythe/tmtest $docker_cmd
 fi
 
 echo2 "Opening the viewer"
 
-sv results.json:"$LOCAL_RESULTS/results.json"
+sv results.json:"$HARVEST/results.json"

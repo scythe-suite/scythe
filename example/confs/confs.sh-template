@@ -1,46 +1,4 @@
-# modify the following variables according to your installation
-
 export DEFAULT_TEACHER_ID="<DEFAULT_TEACHER_HERE>"
 export REMOTE_USER="<REMOTE_USER_HERE>"
 export REMOTE_HOST="<REMOTE_HOST_HERE>"
 export SCYTHE_USE_SANDBOX="<NOT_NULL_IF_DOCKER_IS_AVAILABLE>"
-
-# modify the follownig part of this file only if you want to change the standard layout
-
-if [ -z "$SCYTHE_HOME" ]; then
-	echo "scythe: SCYTHE_HOME environment variable should be defined here!" >&2
-	exit 1
-fi
-
-if [ -z "$SCYTHE_CONF" ]; then
-	echo "scythe: SCYTHE_CONF environment variable should be defined here!" >&2
-	exit 1
-else
-	EXAM_ID="$SCYTHE_CONF"
-fi
-export EXAM_ID
-
-if [ -z "$TEACHER_ID" ]; then
-	TEACHER_ID=$DEFAULT_TEACHER_ID
-fi
-export TEACHER_ID
-
-export CONFS="$(realpath $SCYTHE_HOME/../confs)"
-export DIRS="$(realpath $SCYTHE_HOME/../dirs)"
-
-export BASE_BUNDLE="$CONFS/basebundle"
-export EXERCISES="$CONFS/${EXAM_ID}.txt"
-export REGISTERED_UIDS="$CONFS/${EXAM_ID}.tsv"
-export TM_SETTINGS="$CONFS/${EXAM_ID}.py"
-
-export EXERCISES_REPO="$DIRS/exercises"
-export LOCAL_UPLOADS="$DIRS/uploads/$EXAM_ID"
-export LOCAL_RESULTS="$DIRS/results/$EXAM_ID"
-
-export REMOTE_BASEDIR="/home/$REMOTE_USER/esami/$TEACHER_ID/$EXAM_ID"
-export REMOTE_UPLOADS="$REMOTE_BASEDIR/uploads"
-export REMOTE_ENDPOINT="http://$REMOTE_HOST/tm/$TEACHER_ID/$EXAM_ID/"
-export REMOTE_RUN_COMMAND="cd /home/$REMOTE_USER/esami/ && /home/$REMOTE_USER/tm/run_tm.sh '$TEACHER_ID/$EXAM_ID'"
-export REMOTE_STOP_COMMAND="docker rm -f '$TEACHER_ID-$EXAM_ID'"
-export REMOTE_SESSIONS_COMMAND="if ! docker ps --filter label=scythe=tm | grep -q '$TEACHER_ID-$EXAM_ID'; then echo Stopped; else echo WARNING STILL RUNNING; fi"
-export REMOTE_LOGTAIL_COMMAND="tail -f '$REMOTE_BASEDIR/uploads/'*.log"

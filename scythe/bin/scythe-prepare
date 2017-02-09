@@ -12,8 +12,8 @@ for e in $(tail -n +2 "$EXERCISES"); do
 	echo3 "$e"
 	dst=$(printf '%s/bundle/%02d-%s' "$tempdir" $n "$e")
 	mkdir "$dst"
-	md2html "$EXERCISES_REPO/$e/Testo.md" "$e" "$dst/Testo.html"
-	sf generate -t 2 -fs "$EXERCISES_REPO/$e" -o "$dst"
+	md2html "$EXERCISES_DIR/$e/Testo.md" "$e" "$dst/Testo.html"
+	sf generate -t 2 -fs "$EXERCISES_DIR/$e" -o "$dst"
 	n=$(( n + 1 ))
 done
 

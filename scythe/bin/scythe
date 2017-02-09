@@ -25,15 +25,15 @@ fi
 shift
 
 if [ -z "$1" ]; then
-	echo "scythe: please specify the conf!" >&2
+	echo "scythe: please specify the conf name!" >&2
 	exit 1
 fi
 SCYTHE_CONF="$1"
 shift
 
-source "$SCYTHE_HOME/../confs/confs.sh"
+source "$SCYTHE_HOME/confs.sh"
 if [ ! -r "$EXERCISES" ]; then
-	echo "scythe: exercises list '$EXERCISES' not readable!" 2>&1
+	echo "scythe: exercises list '$EXERCISES' not readable!" >&2
 	exit 1
 fi
 
