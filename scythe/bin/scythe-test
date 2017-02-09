@@ -9,6 +9,7 @@ else
 fi
 
 mkdir -p "$HARVEST"
+touch "$HARVEST/results.json" # this is to allow docker to mount it as a file
 
 if [ -z "$SCYTHE_USE_SANDBOX" ]; then
     echo2 "Executing tests OUT OF THE SANDBOX and generating results"
