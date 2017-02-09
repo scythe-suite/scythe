@@ -7,3 +7,4 @@ scythe/bin/sf
 scythe/bin/sv
 .docker
 .envrc
+release

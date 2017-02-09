@@ -2,9 +2,9 @@ echo1 "Stopping tm on remote server"
 
 echo2 "Stopping..."
 
-ssh "$REMOTE_HOST" "$REMOTE_STOP_COMMAND"
+ssh "$REMOTE_USER@$REMOTE_HOST" "$REMOTE_STOP_COMMAND"
 sleep 1
 
 echo2 "List of active sessions"
 
-ssh "$REMOTE_HOST" "$REMOTE_SESSIONS_COMMAND"
+ssh "$REMOTE_USER@$REMOTE_HOST" "$REMOTE_SESSIONS_COMMAND"

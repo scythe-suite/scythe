@@ -1,36 +1,40 @@
 # Installation instructions
 
-First of all clone this repo with
+Download `scythe.zip`, `exercises.zip`, and `confs.zip` from
 
-    https://github.com/mapio/scythe
+    https://github.com/scythe-suite/scythe/releases
 
-Now set the path and install the required dependencies
+Create an empty dir that we'll call the **base dir** and unzip the first archive
+in it; every time you'll need to use this tool, just go where to the *base dir*
+and set the path using
 
-    . ./setpath.sh
+    source ./setpath.sh
+
+The first time (or when an upgrade of the tool is issued), install the
+dependencies with
+
     scythe init
 
 this will download the latest releases of `tristo-mietitore`, `sim-fun-i`,
 `scythe-viewer` and `md2html`.
 
-Now you need to setup configurations; you can start from an example repo
+Now you need to setup configurations; unzip `confs.zip` in the *base dir*, go in
+the newly created `confs` dir and copy `confs.sh-template` to `confs.sh`, edit
+the first lines of such files
 
-    git clone https://github.com/mapio/scythe-confs-labprog confs
+    export DEFAULT_TEACHER_ID="<DEFAULT_TEACHER_HERE>"
+    export REMOTE_USER="<REMOTE_USER_HERE>"
+    export REMOTE_HOST="<REMOTE_HOST_HERE>"
+    export SCYTHE_USE_SANDBOX="<NOT_NULL_IF_DOCKER_IS_AVAILABLE>"
 
-Now edit `confs/confs.sh` replacing `santini` with your name in line
+to reflect your username, the credentials of the deploy site and whether to use
+Docker as a sandbox for running the tests.
 
-    DEFAULT_TEACHER_ID="santini"
+Finally, make a directory named `./dirs` in the *base dir* and unzip
+`exercises.zip` in it.
 
-Note that if you want to keep track of your conigurations in a repo, you'll need
-to change the remote (you will not be allowed to push to `mapio/scythe-confs-labprog`).
-
-Make a directory named `./dirs` and add a subdirectory named `./dirs/exercises`
-containing exercises, for instance, cloning
-
-    cd ./dirs
-    git clone git@github.com:mapio/labprog-infomus-esercizi.git exercises
-
-It should be all set now. Again, if you want to edit and keep track of your exercises
-you'll need to change the remote (you will not be allowed to push to `mapio/labprog-infomus-esercizi` either).
+If you want to edit and keep track of your configuration and exercises you are
+suggested to turn `confs` and `dirs/exercises` to git repositories.
 
 ## Use
 
@@ -39,7 +43,9 @@ Choose an id for your exam, say `test_exam`, to prepare an exam just add
     ./confs/test_exam.txt
     ./confs/test_exam.tsv
 
-the first file should contain a *secret* followed by a list of exercise names, the second file should cotain a tab-separated list of *matricola*, *cognome nome* (one tab per line).
+the first file should contain a *secret* followed by a list of exercise names,
+the second file should cotain a tab-separated list of *unique id*, and *last and
+first name* (exactly one tab per line, after the ids).
 
 To prepare the configuartion file, just run
 
