@@ -4,7 +4,7 @@ tempdir=$(mktemp -d /tmp/sf-XXXXXXXXX) || exit 1
 
 echo2 "Preparing TM tar directoroy"
 
-echo3 "Adding exercises, making outputs"
+echo3 "Adding exercises, making expected outputs"
 
 mkdir "$tempdir/bundle"
 n=1
@@ -53,7 +53,7 @@ export PATH="\$HOME/bin:\$PATH"
 """
 EOF
 
-filter='^(bin/.*|LEGGIMI\.html|[0-9]+-.+/(Testo\.html|((input|output|args)-[0-9]+)\.txt))$'
+filter='^(bin/.*|LEGGIMI\.html|[0-9]+-.+/(Testo\.html|((input|expected|args)-[0-9]+)\.txt))$'
 tm mkconf -vf "$filter" -b "$tempdir/conf.py" -u "<REPLACEME>" -r "$REGISTERED_UIDS" "$tempdir/bundle" "$TM_SETTINGS"
 
 echo2 "Cleanup temp dir"
