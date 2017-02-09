@@ -1,9 +1,9 @@
-echo2 "Activating tm"
+echo1 "Starting tm on remote server '$REMOTE_HOST'"
 
 ssh "$REMOTE_USER@$REMOTE_HOST" "$REMOTE_RUN_COMMAND"
 sleep 1
 
-echo2 "Checking version hash and logs"
+echo1 "Checking version hash and logs"
 
 tm hashconf "$TM_SETTINGS"
 curl -s "$REMOTE_ENDPOINT" && echo

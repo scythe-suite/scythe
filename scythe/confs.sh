@@ -6,6 +6,7 @@ export HARVESTS_DIR="$(realpath $SCYTHE_HOME/../harvests)"
 
 # autodependencies begin [do not edit this comment]
 
+export SCYTHE_VERSION="v0.1.5"
 export TRISTO_MIETITORE_VERSION="v0.2.3"
 export SIM_FUN_I_VERSION="v0.2.0"
 export SCYTHE_VIEWER_VERSION="v0.2.0"

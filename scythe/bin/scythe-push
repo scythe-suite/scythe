@@ -1,6 +1,4 @@
-echo1 "Pushing to remote server and activating tm"
-
-echo2 "Copying confs to remote host"
+echo1 "Pushing exam conf to remote host"
 
 ssh "$REMOTE_USER@$REMOTE_HOST" "mkdir -p '$REMOTE_BASEDIR'"
 scp "$TM_SETTINGS" "$REMOTE_USER@$REMOTE_HOST:$REMOTE_BASEDIR/conf.py"

@@ -18,22 +18,22 @@ if [ ! -r "$SCYTHE_CMD" ]; then
 	echo "scythe: command '$1' not found!" >&2
 	exit 1
 fi
-if [ "$1" == "init" ]; then
-	INIT=1
+if [ "$1" == "init" ] || [ "$1" == "versions" ]; then
+	NO_FURTHER_ARGS=1
 else
-	INIT=
+	NO_FURTHER_ARGS=
 fi
 shift
 
 SCYTHE_CONF="$1"
-if [ -z "$INIT" ] && [ -z "$SCYTHE_CONF" ]; then
+if [ -z "$NO_FURTHER_ARGS" ] && [ -z "$SCYTHE_CONF" ]; then
 	echo "scythe: please specify the conf name!" >&2
 	exit 1
 fi
 shift
 
 source "$SCYTHE_HOME/confs.sh"
-if [ -z "$INIT" ] && [ ! -r "$EXERCISES" ]; then
+if [ -z "$NO_FURTHER_ARGS" ] && [ ! -r "$EXERCISES" ]; then
 	echo "scythe: exercises list '$EXERCISES' not readable!" >&2
 	exit 1
 fi

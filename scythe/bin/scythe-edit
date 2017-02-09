@@ -1,7 +1,9 @@
 echo1 "Opening exercises texts in current editor ($EDITOR)"
 
-# $EDITOR $(for e in $(tail -n +2 "$EXERCISES" | tac); do echo "$EXERCISES_DIR/$e/Testo.md"; done)
-
-for e in $(tail -n +2 "$EXERCISES"); do
-    $EDITOR "$EXERCISES_DIR/$e"
-done
+if [ -z "$1" ]; then
+    $EDITOR $(for e in $(tail -n +2 "$EXERCISES" | tac); do echo "$EXERCISES_DIR/$e/Testo.md"; done)
+else
+    for e in $(tail -n +2 "$EXERCISES"); do
+        $EDITOR "$EXERCISES_DIR/$e"
+    done
+fi

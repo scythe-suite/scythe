@@ -1,5 +1,3 @@
-#!/bin/bash
-
 echo1 "Opening the results viewer"
 
 sv results.json:"$HARVEST/results.json"

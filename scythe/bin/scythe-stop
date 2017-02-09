@@ -1,4 +1,4 @@
-echo1 "Stopping tm on remote server"
+echo1 "Stopping tm on remote server $REMOTE_HOST"
 
 echo2 "Stopping..."
 
