@@ -1,6 +1,6 @@
 #!/bin/bash
 
 mkdir -p release
-zip -r ./release/scythe.zip setpath.sh scythe
+zip -r ./release/scythe.zip setenv.sh scythe
 (cd example && zip -r ../release/confs.zip confs)
 (cd example && zip -r ../release/exercises.zip exercises)

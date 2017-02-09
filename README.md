@@ -6,4 +6,5 @@ A suite of tools based on
 [zerve](https://github.com/mapio/zerve) to distribute, collect and evaluate
 programming exercieses.
 
-To use the tool follow the [INSTALL](INSTALL.md) instructions.
+Follow the [installation](INSTALL.md) and [usage](USAGE.md) instructions for
+more info.
