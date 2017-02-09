@@ -5,7 +5,7 @@ Create an empty dir that we'll be the **base dir**, download and unpack the
 `scythe.tgz`, `exercises.tgz`, and `confs.tgz` archives; you can accomplish such
 task with
 
-    version="v0.1.3"
+    version="v0.1.5"
     release_url="https://github.com/scythe-suite/scythe/releases/download/$version/"
     curl -sL $release_url/scythe.tgz | tar zxvf -
     curl -sL $release_url/confs\.tgz | tar zxvf -

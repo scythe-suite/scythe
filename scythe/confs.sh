@@ -4,15 +4,21 @@ export CONFS_DIR="$(realpath $SCYTHE_HOME/../confs)"
 export EXERCISES_DIR="$(realpath $SCYTHE_HOME/../exercises)"
 export HARVESTS_DIR="$(realpath $SCYTHE_HOME/../harvests)"
 
-# dependencies
+# autodependencies begin [do not edit this comment]
 
 export TRISTO_MIETITORE_VERSION="v0.2.3"
 export SIM_FUN_I_VERSION="v0.2.0"
 export SCYTHE_VIEWER_VERSION="v0.2.0"
 export MD2HTML_VERSION="v0.2"
 
+# autodependencies end [do not edit this comment]
+
 # user confs
 
+if [ ! -r "$CONFS_DIR/confs.sh" ]; then
+	echo "scythe: missing user confs '$CONFS_DIR/confs.sh'" >&2
+	exit 1
+fi
 source "$CONFS_DIR/confs.sh"
 
 # exam and teacher
