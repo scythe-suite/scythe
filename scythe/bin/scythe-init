@@ -11,7 +11,7 @@ curl -sL https://github.com/scythe-suite/scythe-viewer/releases/download/$SCYTHE
 chmod u+x  "$SCYTHE_HOME/bin/sv"
 
 echo1 "Installing md2html $MD2HTML_VERSION"
-curl -sL https://github.com/scythe-suite/md2html/releases/download/MD2HTML_VERSION/md2html > "$SCYTHE_HOME/bin/md2html"
+curl -sL https://github.com/scythe-suite/md2html/releases/download/$MD2HTML_VERSION/md2html > "$SCYTHE_HOME/bin/md2html"
 chmod u+x  "$SCYTHE_HOME/bin/md2html"
 
 if [ ! -z $SCYTHE_USE_SANDBOX ]; then
