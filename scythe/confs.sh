@@ -4,11 +4,22 @@ export CONFS_DIR="$(realpath $SCYTHE_HOME/../confs)"
 export EXERCISES_DIR="$(realpath $SCYTHE_HOME/../exercises)"
 export HARVESTS_DIR="$(realpath $SCYTHE_HOME/../harvests)"
 
+# dependencies
+
+export TRISTO_MIETITORE_VERSION="v0.2.3"
+export SIM_FUN_I_VERSION="v0.2.0"
+export SCYTHE_VIEWER_VERSION="v0.2.0"
+export MD2HTML_VERSION="v0.2"
+
 # user confs
 
 source "$CONFS_DIR/confs.sh"
 
-# tool confs
+# exam and teacher
+# (depending on:
+#   $SCYTHE_CONF, inherited from the sourcer and
+#   $TEACHER_ID possibly in external env
+# )
 
 export EXAM_ID="$SCYTHE_CONF"
 
@@ -17,6 +28,7 @@ if [ -z "$TEACHER_ID" ]; then
 fi
 export TEACHER_ID
 
+# local dirs
 
 export BASE_BUNDLE="$CONFS_DIR/basebundle"
 export EXERCISES="$CONFS_DIR/${EXAM_ID}.txt"
@@ -25,7 +37,7 @@ export TM_SETTINGS="$CONFS_DIR/${EXAM_ID}.py"
 
 export HARVEST="$HARVESTS_DIR/$EXAM_ID"
 
-# remote stuff
+# remote dirs and commands
 
 export REMOTE_BASEDIR="/home/$REMOTE_USER/esami/$TEACHER_ID/$EXAM_ID"
 export REMOTE_UPLOADS="$REMOTE_BASEDIR/uploads"

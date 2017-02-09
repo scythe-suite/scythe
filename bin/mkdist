@@ -1,6 +1,7 @@
 #!/bin/bash
 
-mkdir -p release
-zip -r ./release/scythe.zip setenv.sh scythe
-(cd example && zip -r ../release/confs.zip confs)
-(cd example && zip -r ../release/exercises.zip exercises)
+mkdir -p ./release
+rm -rf ./release/*.tgz
+tar zcvf ./release/scythe.tgz setenv.sh scythe
+(cd example && tar zcvf ../release/confs.tgz confs)
+(cd example && tar zcvf ../release/exercises.tgz exercises)

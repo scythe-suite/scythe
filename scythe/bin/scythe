@@ -9,30 +9,31 @@ if [ -z $SCYTHE_HOME ]; then
 	exit 1
 fi
 
+SCYTHE_CMD="$SCYTHE_HOME/bin/scythe-$1"
 if [ -z "$1" ]; then
 	echo "scythe: available commands: $(ls -1 "$SCYTHE_HOME/bin/scythe-"* | sed 's/.*\/bin\/scythe-\(.*\)/\1/g' | paste -s -d' ' -)" 2>&1
 	exit 1
 fi
-SCYTHE_CMD="$SCYTHE_HOME/bin/scythe-$1"
 if [ ! -r "$SCYTHE_CMD" ]; then
 	echo "scythe: command '$1' not found!" >&2
 	exit 1
 fi
 if [ "$1" == "init" ]; then
-	source "$SCYTHE_CMD"
-	exit 0
+	INIT=1
+else
+	INIT=
 fi
 shift
 
-if [ -z "$1" ]; then
+SCYTHE_CONF="$1"
+if [ -z "$INIT" ] && [ -z "$SCYTHE_CONF" ]; then
 	echo "scythe: please specify the conf name!" >&2
 	exit 1
 fi
-SCYTHE_CONF="$1"
 shift
 
 source "$SCYTHE_HOME/confs.sh"
-if [ ! -r "$EXERCISES" ]; then
+if [ -z "$INIT" ] && [ ! -r "$EXERCISES" ]; then
 	echo "scythe: exercises list '$EXERCISES' not readable!" >&2
 	exit 1
 fi
