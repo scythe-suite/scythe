@@ -8,15 +8,12 @@ else
     local_cmd=""
 fi
 
-echo2 "Executing tests and generating results"
-
 mkdir -p "$HARVEST"
+
 if [ -z "$SCYTHE_USE_SANDBOX" ]; then
+    echo2 "Executing tests OUT OF THE SANDBOX and generating results"
     sf tmtest $local_cmd -c "$TM_SETTINGS" -u "$HARVEST/uploads" -r "$HARVEST/results.json"
 else
+    echo2 "Executing tests and generating results"
     docker run -it --rm -v "$HARVEST/uploads":/uploads -v "$TM_SETTINGS":/conf.py:ro -v "$HARVEST/results.json":/results.json scythe/tmtest $docker_cmd
 fi
-
-echo2 "Opening the viewer"
-
-sv results.json:"$HARVEST/results.json"

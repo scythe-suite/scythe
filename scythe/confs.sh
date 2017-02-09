@@ -1,3 +1,15 @@
+# tool dirs
+
+export CONFS_DIR="$(realpath $SCYTHE_HOME/../confs)"
+export EXERCISES_DIR="$(realpath $SCYTHE_HOME/../exercises)"
+export HARVESTS_DIR="$(realpath $SCYTHE_HOME/../harvests)"
+
+# user confs
+
+source "$CONFS_DIR/confs.sh"
+
+# tool confs
+
 export EXAM_ID="$SCYTHE_CONF"
 
 if [ -z "$TEACHER_ID" ]; then
@@ -5,9 +17,6 @@ if [ -z "$TEACHER_ID" ]; then
 fi
 export TEACHER_ID
 
-export CONFS_DIR="$(realpath $SCYTHE_HOME/../confs)"
-export EXERCISES_DIR="$(realpath $SCYTHE_HOME/../exercises)"
-export HARVESTS_DIR="$(realpath $SCYTHE_HOME/../harvests)"
 
 export BASE_BUNDLE="$CONFS_DIR/basebundle"
 export EXERCISES="$CONFS_DIR/${EXAM_ID}.txt"
