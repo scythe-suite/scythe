@@ -1,0 +1,13 @@
+#!/bin/bash
+
+lab="$1"
+if [ -z "$lab" ]; then
+    TM=".tm"
+else
+    case "$lab" in
+        01|02|03|04|05|06|07|08|09|10|11|12) ;;
+        *) echo "consegna: il laboratorio deve essere uno tra: 01, 02, 03, 04, 05, 06, 07, 08, 09, 10, 11, 12" 2>&1; exit 1;;
+    esac
+    TM="$HOME/labprog/laboratorio_$lab/bin/.tm"
+fi
+$TM ul '^[0-9]+-.+/[^/]*\.(java|sh)$'
