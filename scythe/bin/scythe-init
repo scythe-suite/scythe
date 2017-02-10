@@ -22,6 +22,6 @@ if [ ! -z $SCYTHE_USE_SANDBOX ]; then
     cp "$SCYTHE_HOME/bin/tm" "$SCYTHE_HOME/../.docker"
     cp "$SCYTHE_HOME/bin/sf" "$SCYTHE_HOME/../.docker"
     cd "$SCYTHE_HOME/../.docker"
-    docker build -t scythe/tmtest .
+    docker build --build-arg userid="$(id -u)" -t scythe/tmtest .
     ) >/dev/null
 fi
