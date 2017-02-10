@@ -1,20 +1,54 @@
 echo1 "Runnig the test cycle"
 
-if [ -z "$1" ]; then
-    docker_cmd=""
-    local_cmd="-n"
-else
-    docker_cmd="tmtest -c /conf.py -u /uploads -r /results.json"
-    local_cmd=""
+clean_opt='-n'
+restrict_path=''
+while getopts ":cr:" opt; do
+  case $opt in
+    c)
+      clean_opt=''
+      ;;
+    r)
+      restrict_path="$(realpath $OPTARG)"
+      if [ ! -r "$restrict_path" ]; then
+        echo "scythe test: cannot read '$restrict_path' file." >&2
+        exit 1
+      fi
+      ;;
+    \?)
+      echo "scythe test: invalid option: -$OPTARG." >&2
+      exit 1
+      ;;
+    :)
+      echo "scythe test: option -$OPTARG requires an argument." >&2
+      exit 1
+      ;;
+  esac
+done
+
+if [ -z "$clean_opt" ]; then
+    echo3 "Will clean old compilations and executions."
+fi
+docker_cmd="tmtest $clean_opt -c /conf.py -u /uploads -r /results.json"
+if [ ! -z "$restrict_path" ]; then
+    echo3 "Will restrict UIDs to the one in '$restrict_path'."
+    docker_cmd="$docker_cmd -F /uids.tsv"
 fi
 
 mkdir -p "$HARVEST"
-touch "$HARVEST/results.json" # this is to allow docker to mount it as a file
 
 if [ -z "$SCYTHE_USE_SANDBOX" ]; then
     echo2 "Executing tests OUT OF THE SANDBOX and generating results"
-    sf tmtest $local_cmd -c "$TM_SETTINGS" -u "$HARVEST/uploads" -r "$HARVEST/results.json"
+    if [ -z "$restrict_path" ]; then
+        sf tmtest $clean_opt -c "$TM_SETTINGS" -u "$HARVEST/uploads" -r "$HARVEST/results.json"
+    else
+        sf tmtest $clean_opt -c "$TM_SETTINGS" -u "$HARVEST/uploads" -r "$HARVEST/results.json" -F "$restrict_path"
+    fi
 else
     echo2 "Executing tests and generating results"
-    docker run -it --rm -v "$HARVEST/uploads":/uploads -v "$TM_SETTINGS":/conf.py:ro -v "$HARVEST/results.json":/results.json scythe/tmtest $docker_cmd
+    touch "$HARVEST/results.json" # this is to allow docker to mount it as a file
+    if [ -z "$restrict_path" ]; then
+        docker run -it --rm -v "$HARVEST/uploads":/uploads -v "$TM_SETTINGS":/conf.py:ro -v "$HARVEST/results.json":/results.json scythe/tmtest $docker_cmd
+    else
+        docker run -it --rm -v "$restrict_path":/uids.tsv:ro -v "$HARVEST/uploads":/uploads -v "$TM_SETTINGS":/conf.py:ro -v "$HARVEST/results.json":/results.json scythe/tmtest $docker_cmd
+    fi
 fi
