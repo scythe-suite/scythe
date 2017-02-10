@@ -3,8 +3,8 @@ echo1 "Versions of installed tools"
 echo2 "From configurations"
 
 echo "scythe: $SCYTHE_VERSION"
-echo "tristo-mietitore: $TRISTO_MIETITORE_VERSION"
 echo "sim-fun-i: $SIM_FUN_I_VERSION"
+echo "tristo-mietitore: $TRISTO_MIETITORE_VERSION"
 echo "scythe-viewer: $SCYTHE_VIEWER_VERSION"
 echo "md2html: $MD2HTML_VERSION"
 
