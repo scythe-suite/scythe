@@ -6,9 +6,9 @@ export HARVESTS_DIR="$(realpath $SCYTHE_HOME/../harvests)"
 
 # autodependencies begin [do not edit this comment]
 
-export SCYTHE_VERSION="v0.1.5"
-export TRISTO_MIETITORE_VERSION="v0.2.3"
-export SIM_FUN_I_VERSION="v0.2.0"
+export SCYTHE_VERSION="v0.1.6"
+export TRISTO_MIETITORE_VERSION="v0.2.4"
+export SIM_FUN_I_VERSION="v0.2.1"
 export SCYTHE_VIEWER_VERSION="v0.2.0"
 export MD2HTML_VERSION="v0.2"
 
@@ -53,7 +53,3 @@ export REMOTE_RUN_COMMAND="cd /home/$REMOTE_USER/esami/ && /home/$REMOTE_USER/tm
 export REMOTE_STOP_COMMAND="docker rm -f '$TEACHER_ID-$EXAM_ID'"
 export REMOTE_SESSIONS_COMMAND="if ! docker ps --filter label=scythe=tm | grep -q '$TEACHER_ID-$EXAM_ID'; then echo Stopped; else echo WARNING STILL RUNNING; fi"
 export REMOTE_LOGTAIL_COMMAND="tail -f '$REMOTE_BASEDIR/uploads/'*.log"
-
-# misc
-
-export PYTHONPATH="$SCYTHE_HOME/bin/tm:$SCYTHE_HOME/bin/sf"
