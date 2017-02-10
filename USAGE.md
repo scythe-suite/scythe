@@ -4,7 +4,7 @@
 
 Firt of all, design a few exercises and put them in the `exercises` dir.
 
-Then a name for your exam, say `myexam`, then add
+Then choose a name for your exam, say `myexam`, and add
 
     ./confs/myexam.txt
     ./confs/myexam.tsv
@@ -12,17 +12,17 @@ Then a name for your exam, say `myexam`, then add
 * the first file must contain a *secret* followed by a list of exercise
   names, that is, names of directories under `exercises`;
 
-* the second file must cotain a tab-separated list of *unique id*,
+* the second file must cotain a tab-separated list of *unique ids*,
   and *last and first name* (exactly one tab per line, after the ids).
 
-Give a look to the example unpacked in the previous step in case of doubt.
+Give a look to the example unpacked during the installation in case of doubt.
 
 To prepare the configuartion file, just run
 
     source ./setenv.sh
     scythe prepare myexam
 
-that will generate `./confs/myexam.py`, the configuration file required for all
+that will generate `./confs/myexam.py`: the configuration file required for all
 the next steps.
 
 ## Run the exam
@@ -32,12 +32,12 @@ Now you can push the configuration to the remote server and start it with
     scythe push myexam
     scythe start myexam
 
-at the end of the allowd time,
+At the end of the allowed time,
 
     scythe stop myexam
 
-will stop the server (so that no student will be able to upload after the exam
-deadline).
+will stop the server (so that no student will be able to upload his solution
+after the exam deadline).
 
 During the exam you can run
 
@@ -60,4 +60,11 @@ and view the results with
 
     scythe view myexam
 
-You can run these steps as many times as you want during the exam.
+You can run these steps as many times as you want during the exam. The `test`
+subcommand support two options:
+
+* `-c` to force a cleanup of previously compiled and executed tests,
+
+* `-r <UIDS_FILE>.tsv` to restrict the evaluation to a subset of UIDs (the given
+  file must have the same tab-separated format of the UIDs file used to Prepare
+  the exam configuration).
