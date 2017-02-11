@@ -17,9 +17,9 @@ time to update the tool, since it will not overwrite any of your files.
 Every time you'll need to use this tool, just go to the *base dir* and set the
 required environment variables using
 
-    source ./setpath.sh
+    source ./setenv.sh
 
-note that if you use [direnv](https://direnv.net/) just link `setpath.sh` to
+note that if you use [direnv](https://direnv.net/) just link `setenv.sh` to
 `.envrc` and direnv will take care of this step for you!
 
 Now setup your local configurations: go in the newly created `confs` dir and

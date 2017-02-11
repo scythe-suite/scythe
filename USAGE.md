@@ -2,22 +2,23 @@
 
 ## Prepare the configuration
 
-Firt of all, design a few exercises and put them in the `exercises` dir.
+First of all, design a few exercises and put them in the `exercises` dir.
 
 Then choose a name for your exam, say `myexam`, and add
 
     ./confs/myexam.txt
     ./confs/myexam.tsv
 
-* the first file must contain a *secret* followed by a list of exercise
-  names, that is, names of directories under `exercises`;
+* the first file must contain, on the first line, a *secret* followed by a list
+  of exercise names (one execise per line), that is, names of directories in
+  the `exercises` folder;
 
-* the second file must cotain a tab-separated list of *unique ids*,
+* the second file must contain a tab-separated list of *unique ids*,
   and *last and first name* (exactly one tab per line, after the ids).
 
 Give a look to the example unpacked during the installation in case of doubt.
 
-To prepare the configuartion file, just run
+To prepare the configuration file, just run
 
     source ./setenv.sh
     scythe prepare myexam
@@ -61,10 +62,10 @@ and view the results with
     scythe view myexam
 
 You can run these steps as many times as you want during the exam. The `test`
-subcommand support two options:
+subcommand supports two options:
 
 * `-c` to force a cleanup of previously compiled and executed tests,
 
 * `-r <UIDS_FILE>.tsv` to restrict the evaluation to a subset of UIDs (the given
-  file must have the same tab-separated format of the UIDs file used to Prepare
+  file must have the same tab-separated format of the UIDs file used to prepare
   the exam configuration).
