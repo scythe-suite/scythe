@@ -1,21 +1,31 @@
-echo1 "Installing tristo-mietitore $TRISTO_MIETITORE_VERSION"
-curl -sL https://github.com/scythe-suite/tristo-mietitore/releases/download/$TRISTO_MIETITORE_VERSION/tm > "$SCYTHE_HOME/bin/tm"
+echo1 "Upgrading dependencies"
+
+scythe_version=$(suite_latest_version scythe)
+echo2 "Upgrading scythe $scythe_version"
+curl -sL https://github.com/scythe-suite/scythe/releases/download/$scythe_version/scythe.tgz | tar zxvf -
+
+tristo_mietitore_version=$(suite_latest_version tristo-mietitore)
+echo2 "Upgrading tristo-mietitore $tristo_mietitore_version"
+curl -sL https://github.com/scythe-suite/tristo-mietitore/releases/download/$tristo_mietitore_version/tm > "$SCYTHE_HOME/bin/tm"
 chmod u+x  "$SCYTHE_HOME/bin/tm"
 
-echo1 "Installing sim-fun-i $SIM_FUN_I_VERSION"
-curl -sL https://github.com/scythe-suite/sim-fun-i/releases/download/$SIM_FUN_I_VERSION/sf > "$SCYTHE_HOME/bin/sf"
+sim_fun_i_version=$(suite_latest_version sim-fun-i)
+echo2 "Upgrading sim-fun-i $sim_fun_i_version"
+curl -sL https://github.com/scythe-suite/sim-fun-i/releases/download/$sim_fun_i_version/sf > "$SCYTHE_HOME/bin/sf"
 chmod u+x  "$SCYTHE_HOME/bin/sf"
 
-echo1 "Installing scythe-viewer $SCYTHE_VIEWER_VERSION"
-curl -sL https://github.com/scythe-suite/scythe-viewer/releases/download/$SCYTHE_VIEWER_VERSION/sv > "$SCYTHE_HOME/bin/sv"
+scythe_viewer_version=$(suite_latest_version scythe-viewer)
+echo2 "Upgrading scythe-viewer $scythe_viewer_version"
+curl -sL https://github.com/scythe-suite/scythe-viewer/releases/download/$scythe_viewer_version/sv > "$SCYTHE_HOME/bin/sv"
 chmod u+x  "$SCYTHE_HOME/bin/sv"
 
-echo1 "Installing md2html $MD2HTML_VERSION"
-curl -sL https://github.com/scythe-suite/md2html/releases/download/$MD2HTML_VERSION/md2html > "$SCYTHE_HOME/bin/md2html"
+md2html_version=$(suite_latest_version md2html)
+echo2 "Upgrading md2html $md2html_version"
+curl -sL https://github.com/scythe-suite/md2html/releases/download/$md2html_version/md2html > "$SCYTHE_HOME/bin/md2html"
 chmod u+x  "$SCYTHE_HOME/bin/md2html"
 
 if [ ! -z $SCYTHE_USE_SANDBOX ]; then
-    echo1 "Creating 'scythe/tmtest' docker image"
+    echo2 "Creating 'scythe/tmtest' docker image"
     (
     mkdir -p "$SCYTHE_HOME/../.docker"
     cp "$SCYTHE_HOME/Dockerfile" "$SCYTHE_HOME/../.docker"

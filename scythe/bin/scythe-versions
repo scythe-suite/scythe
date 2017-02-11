@@ -1,12 +1,12 @@
 echo1 "Versions of installed tools"
 
-echo2 "From configurations"
+echo2 "From GitHub"
 
-echo "scythe: $SCYTHE_VERSION"
-echo "sim-fun-i: $SIM_FUN_I_VERSION"
-echo "tristo-mietitore: $TRISTO_MIETITORE_VERSION"
-echo "scythe-viewer: $SCYTHE_VIEWER_VERSION"
-echo "md2html: $MD2HTML_VERSION"
+echo "scythe: $(suite_latest_version scythe)"
+echo "sim-fun-i: $(suite_latest_version sim-fun-i)"
+echo "tristo-mietitore: $(suite_latest_version tristo-mietitore)"
+echo "scythe-viewer: $(suite_latest_version scythe-viewer)"
+echo "md2html: $(suite_latest_version md2html)"
 
 echo2 "As reported by tools"
 
@@ -17,7 +17,7 @@ echo3 tristo-mietitore
 tm version
 
 if [ ! -z "$SCYTHE_USE_SANDBOX" ]; then
-    echo2 "As reported by the Docker image"
+    echo2 "As reported by tools in the Docker image"
 
     echo3 sim-fun-i
     docker run --rm -it scythe/tmtest version

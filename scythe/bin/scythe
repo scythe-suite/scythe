@@ -18,7 +18,7 @@ if [ ! -r "$SCYTHE_CMD" ]; then
 	echo "scythe: command '$1' not found!" >&2
 	exit 1
 fi
-if [ "$1" == "init" ] || [ "$1" == "versions" ]; then
+if [ "$1" == "upgrade" ] || [ "$1" == "versions" ]; then
 	NO_FURTHER_ARGS=1
 else
 	NO_FURTHER_ARGS=
