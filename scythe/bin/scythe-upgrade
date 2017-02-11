@@ -2,7 +2,7 @@ echo1 "Upgrading dependencies"
 
 scythe_version=$(suite_latest_version scythe)
 echo2 "Upgrading scythe $scythe_version"
-curl -sL https://github.com/scythe-suite/scythe/releases/download/$scythe_version/scythe.tgz | tar zxvf -
+curl -sL https://github.com/scythe-suite/scythe/releases/download/$scythe_version/scythe.tgz | tar zxf -
 
 tristo_mietitore_version=$(suite_latest_version tristo-mietitore)
 echo2 "Upgrading tristo-mietitore $tristo_mietitore_version"
