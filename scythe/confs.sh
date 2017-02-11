@@ -1,3 +1,7 @@
+#
+
+export SCYTHE_VERSION=1.0.7
+
 # tool dirs
 
 export CONFS_DIR="$(realpath $SCYTHE_HOME/../confs)"

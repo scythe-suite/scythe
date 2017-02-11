@@ -10,6 +10,9 @@ echo "md2html: $(suite_latest_version md2html)"
 
 echo2 "As reported by tools"
 
+echo3 scythe
+echo "scythe: version: $SCYTHE_VERSION" >&2
+
 echo3 sim-fun-i
 sf version
 
