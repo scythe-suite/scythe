@@ -1,9 +1,9 @@
 #!/bin/bash
 
 last=$(curl -sLo /dev/null -w '%{url_effective}' "https://github.com/scythe-suite/scythe/releases/latest")
-echo "echo 'scythe: installing version ${last##*/}...''
+echo "scythe: installing version ${last##*/}..."
 url="https://github.com/scythe-suite/scythe/releases/download/${last##*/}/"
 for archive in scythe confs exercises; do
-    echo "echo 'scythe: installing $archive'"
+    echo "scythe: installing $archive"
     curl -sL $url/$archive.tgz | tar zxvf -
 done
