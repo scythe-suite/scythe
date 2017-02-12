@@ -1,6 +1,6 @@
 #
 
-export SCYTHE_VERSION=0.1.8
+export SCYTHE_VERSION=0.2.0
 
 # tool dirs
 
