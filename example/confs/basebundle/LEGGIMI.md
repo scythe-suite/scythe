@@ -21,15 +21,16 @@ Gli impazienti pososno viceversa seguire queste brevi indicazioni:
 
 3) implementate la vostra soluzione in uno (o più) file (salvati
    nella directory corrente, con nome qualunque purché con estensione
-   `.java`, oppure `.sh`), avendo cura di definire una ed una sola
+   `.java`, `.c`, oppure `.sh`), avendo cura di definire una ed una sola
    funzione, o metodo, di nome `main`.
 
 4) eseguite il comando:
 
         verifica
 
-   se l'esecuzione del comando riporta errori (di compilazione,
-   o esecuzione), correggeteli prima di procedere,
+   che compila la soluzione e verifica il suo comportamento sui file di test;
+   se l'esecuzione del comando riporta errori (di compilazione, o esecuzione),
+   correggeteli prima di procedere,
 
 5) una vota che la verifica ha successo, consegnate il vostro
    materiale con il comando
