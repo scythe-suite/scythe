@@ -1,6 +1,6 @@
 #
 
-export SCYTHE_VERSION=0.2.0
+export SCYTHE_VERSION=0.2.1
 
 # tool dirs
 
@@ -19,13 +19,13 @@ source "$CONFS_DIR/confs.sh"
 # exam and teacher
 # (depending on:
 #   $SCYTHE_CONF, inherited from the sourcer and
-#   $TEACHER_ID possibly in external env
+#   $TEACHER_ID possibly in external env, or $SCYTHE_TEACHER_ID from sourcer
 # )
 
 export EXAM_ID="$SCYTHE_CONF"
 
 if [ -z "$TEACHER_ID" ]; then
-	TEACHER_ID=$DEFAULT_TEACHER_ID
+	TEACHER_ID="$SCYTHE_TEACHER_ID"
 fi
 export TEACHER_ID
 
@@ -38,15 +38,9 @@ export TM_SETTINGS="$CONFS_DIR/${EXAM_ID}.py"
 
 export HARVEST="$HARVESTS_DIR/$EXAM_ID"
 
-# remote dirs and commands
+# remote endpoint
 
-export REMOTE_BASEDIR="/home/$REMOTE_USER/esami/$TEACHER_ID/$EXAM_ID"
-export REMOTE_UPLOADS="$REMOTE_BASEDIR/uploads"
-export REMOTE_ENDPOINT="http://$REMOTE_HOST/tm/$TEACHER_ID/$EXAM_ID/"
-export REMOTE_RUN_COMMAND="cd /home/$REMOTE_USER/esami/ && /home/$REMOTE_USER/tm/run_tm.sh '$TEACHER_ID/$EXAM_ID'"
-export REMOTE_STOP_COMMAND="docker rm -f '$TEACHER_ID-$EXAM_ID'"
-export REMOTE_SESSIONS_COMMAND="if ! docker ps --filter label=scythe=tm | grep -q '$TEACHER_ID-$EXAM_ID'; then echo Stopped; else echo WARNING STILL RUNNING; fi"
-export REMOTE_LOGTAIL_COMMAND="tail -f '$REMOTE_BASEDIR/uploads/'*.log"
+export REMOTE_ENDPOINT="http://$SCYTHE_SERVER/tm/$TEACHER_ID/$EXAM_ID/"
 
 # functions
 

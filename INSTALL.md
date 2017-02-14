@@ -18,9 +18,9 @@ Note that if you use [direnv](https://direnv.net/) just link `setenv.sh` to
 Now setup your local configurations: go in the newly created `confs` dir and
 move `confs.sh-template` to `confs.sh`, then edit the first lines of such file
 
-    export DEFAULT_TEACHER_ID="<YOUR_NAME_HERE>"
-    export REMOTE_USER="<REMOTE_USER_HERE>"
-    export REMOTE_HOST="<REMOTE_HOST_HERE>"
+    export SCYTHE_TEACHER_ID="<YOUR_NAME_HERE>"
+    export SCYTHE_USER="<REMOTE_USER_HERE>"
+    export SCYTHE_SERVER="<REMOTE_HOST_HERE>"
     export SCYTHE_USE_SANDBOX="<NOT_NULL_IF_DOCKER_IS_AVAILABLE>"
 
 to reflect your username, the credentials for the deploy site and whether to use

@@ -1,3 +1,3 @@
-echo1 "Tailing logs on remote server '$REMOTE_HOST'"
+echo1 "Tailing logs on remote server '$SCYTHE_SERVER'"
 
-ssh "$REMOTE_USER@$REMOTE_HOST" "$REMOTE_LOGTAIL_COMMAND"
+ssh "$SCYTHE_USER@$SCYTHE_SERVER" "logtail $EXAM_ID"

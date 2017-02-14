@@ -1,10 +1,3 @@
-echo1 "Stopping tm on remote server $REMOTE_HOST"
+echo1 "Stopping tm on remote server 'SCYTHE_SERVER'"
 
-echo2 "Stopping..."
-
-ssh "$REMOTE_USER@$REMOTE_HOST" "$REMOTE_STOP_COMMAND"
-sleep 1
-
-echo2 "List of active sessions"
-
-ssh "$REMOTE_USER@$REMOTE_HOST" "$REMOTE_SESSIONS_COMMAND"
+ssh "$SCYTHE_USER@$SCYTHE_SERVER" "stop $EXAM_ID"

@@ -1,4 +1,4 @@
-echo1 "Getting uploads from remote server '$REMOTE_HOST'"
+echo1 "Getting uploads from remote server 'SCYTHE_SERVER'"
 
 mkdir -p "$HARVEST/uploads"
-rsync -zPa "$REMOTE_USER@$REMOTE_HOST:$REMOTE_UPLOADS/" "$HARVEST/uploads"
+rsync -e "ssh $SCYTHE_USER@$SCYTHE_SERVER get $EXAM_ID" -zPav $SCYTHE_USER@$SCYTHE_SERVER:NOT_RELEVANT "$HARVEST"

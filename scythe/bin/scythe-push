@@ -1,4 +1,3 @@
-echo1 "Pushing exam conf to remote host"
+echo1 "Pushing exam conf to remote server 'SCYTHE_SERVER'"
 
-ssh "$REMOTE_USER@$REMOTE_HOST" "mkdir -p '$REMOTE_BASEDIR'"
-scp "$TM_SETTINGS" "$REMOTE_USER@$REMOTE_HOST:$REMOTE_BASEDIR/conf.py"
+cat "$TM_SETTINGS" | ssh "$SCYTHE_USER@$SCYTHE_SERVER" "push $EXAM_ID"
