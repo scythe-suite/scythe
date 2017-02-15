@@ -57,7 +57,7 @@ export PATH="\$HOME/bin:\$PATH"
 EOF
 
 filter='^(bin/.*|LEGGIMI\.html|[0-9]+-.+/(Testo\.html|((input|expected|args)-[0-9]+)\.txt))$'
-tm mkconf -vf "$filter" -b "$tempdir/conf.py" -u "<REPLACEME>" -r "$REGISTERED_UIDS" "$tempdir/bundle" "$TM_SETTINGS"
+tm mkconf -vf "$filter" -b "$tempdir/conf.py" -r "$REGISTERED_UIDS" "$tempdir/bundle" "$TM_SETTINGS"
 
 echo2 "Cleanup temp dir"
 
