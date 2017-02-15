@@ -1,4 +1,4 @@
-#
+# current version
 
 export SCYTHE_VERSION=0.3.1
 

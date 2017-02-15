@@ -4,7 +4,7 @@ echo1() { echo -e "\033[34m*** $@...\033[0m"; }
 echo2() { echo -e "\033[31m** $@...\033[0m"; }
 echo3() { echo -e "\033[32m* $@...\033[0m"; }
 
-if [ -z $SCYTHE_HOME ]; then
+if [ -z "$SCYTHE_HOME" ]; then
 	echo "scythe: please set the required environment variables sourcing setpath.sh" 2>&1
 	exit 1
 fi
@@ -33,8 +33,8 @@ fi
 shift
 
 source "$SCYTHE_HOME/confs.sh"
-if [ -z "$NO_FURTHER_ARGS" ] && [ ! -r "$EXERCISES" ]; then
-	echo "scythe: exercises list '$EXERCISES' not readable!" >&2
+if [ -z "$NO_FURTHER_ARGS" ] && [ ! -r "$TM_SETTINGS" ]; then
+	echo "scythe: configuration '$TM_SETTINGS' not readable!" >&2
 	exit 1
 fi
 
