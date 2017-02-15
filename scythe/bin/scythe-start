@@ -1,9 +1,15 @@
 echo1 "Starting tm on remote server '$SCYTHE_SERVER'"
 
+echo2 "Exexuting remote start"
+
 ssh "$SCYTHE_USER@$SCYTHE_SERVER" "start $EXAM_ID"
 
-echo1 "Checking local and remote version configuration hash"
+echo2 "Checking local and remote version configuration hash"
 
 tm hashconf "$TM_SETTINGS"
 sleep 1
 curl -s "$REMOTE_ENDPOINT" && echo
+
+echo2 "Attempting signing as the test account"
+
+docker run --rm -it --entrypoint sh scythe/tmtest -c "export HOME=/home/tmuser/test; eval \$( python -c 'from urllib2 import urlopen; exec urlopen( \"$REMOTE_ENDPOINT/000000\" ).read()' ) && cd /home/tmuser/test && find"
