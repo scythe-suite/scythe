@@ -1,10 +1,5 @@
 echo1 "Preparing configuration"
 
-if [ ! -r "$EXERCISES" ]; then
-    echo "scythe: exercises list '$EXERCISES' not readable!" >&2
-    exit 1
- fi
-
 tempdir=$(mktemp -d /tmp/sf-XXXXXXXXX) || exit 1
 
 echo2 "Preparing TM tar directoroy"
