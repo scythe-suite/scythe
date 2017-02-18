@@ -1,6 +1,6 @@
 echo1 "Inquiring tm status on remote server '$SCYTHE_SERVER'"
 
-ssh "$SCYTHE_USER@$SCYTHE_SERVER" "status $EXAM_ID"
+ssh "$SCYTHE_USER@$SCYTHE_SERVER" "status $SCYTHE_EXAM_ID"
 
 echo1 "Checking local and remote version configuration hash"
 

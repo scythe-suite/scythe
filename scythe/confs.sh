@@ -16,31 +16,18 @@ if [ ! -r "$CONFS_DIR/confs.sh" ]; then
 fi
 source "$CONFS_DIR/confs.sh"
 
-# exam and teacher
-# (depending on:
-#   $SCYTHE_CONF, inherited from the sourcer and
-#   $TEACHER_ID possibly in external env, or $SCYTHE_TEACHER_ID from sourcer
-# )
-
-export EXAM_ID="$SCYTHE_CONF"
-
-if [ -z "$TEACHER_ID" ]; then
-	TEACHER_ID="$SCYTHE_TEACHER_ID"
-fi
-export TEACHER_ID
-
 # local dirs
 
 export BASE_BUNDLE="$CONFS_DIR/basebundle"
-export EXERCISES="$CONFS_DIR/${EXAM_ID}.txt"
-export REGISTERED_UIDS="$CONFS_DIR/${EXAM_ID}.tsv"
-export TM_SETTINGS="$CONFS_DIR/${EXAM_ID}.py"
+export EXERCISES="$CONFS_DIR/${SCYTHE_EXAM_ID}.txt"
+export REGISTERED_UIDS="$CONFS_DIR/${SCYTHE_EXAM_ID}.tsv"
+export TM_SETTINGS="$CONFS_DIR/${SCYTHE_EXAM_ID}.py"
 
-export HARVEST="$HARVESTS_DIR/$EXAM_ID"
+export HARVEST="$HARVESTS_DIR/$SCYTHE_EXAM_ID"
 
 # remote endpoint
 
-export REMOTE_ENDPOINT="http://$SCYTHE_SERVER/tm/$TEACHER_ID/$EXAM_ID/"
+export REMOTE_ENDPOINT="http://$SCYTHE_SERVER/tm/$SCYTHE_TEACHER_ID/$SCYTHE_EXAM_ID/"
 
 # functions
 

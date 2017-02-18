@@ -10,17 +10,20 @@ if [ -z "$SCYTHE_HOME" ]; then
 fi
 
 command="$1"
-SCYTHE_CMD="$SCYTHE_HOME/bin/scythe-$command"
 if [ -z "$command" ]; then
 	echo "scythe: available commands: $(ls -1 "$SCYTHE_HOME/bin/scythe-"* | sed 's/.*\/bin\/scythe-\(.*\)/\1/g' | paste -s -d' ' -)" 2>&1
 	exit 1
 fi
+SCYTHE_CMD="$SCYTHE_HOME/bin/scythe-$command"
 if [ ! -r "$SCYTHE_CMD" ]; then
 	echo "scythe: command '$command' not found!" >&2
 	exit 1
 fi
 shift
-SCYTHE_CONF="$1"
+if [ -z "$SCYTHE_EXAM_ID" ]; then
+	SCYTHE_EXAM_ID="$1"
+fi
+export SCYTHE_EXAM_ID
 shift
 source "$SCYTHE_HOME/confs.sh"
 
