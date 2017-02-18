@@ -12,14 +12,14 @@ for e in $(tail -n +2 "$EXERCISES"); do
 	echo3 "$e"
 	dst=$(printf '%s/bundle/%02d-%s' "$tempdir" $n "$e")
 	mkdir "$dst"
-	md2html "$EXERCISES_DIR/$e/Testo.md" "$e" "$dst/Testo.html"
+	convert_mds "$EXERCISES_DIR/$e" "$dst"
 	sf generate -t 2 -fs "$EXERCISES_DIR/$e" -e "$dst"
 	n=$(( n + 1 ))
 done
 
-echo3 "Adding readme and bins"
+echo3 "Adding markdowns and bins"
 
-md2html "$BASE_BUNDLE/LEGGIMI.md" LEGGIMI "$tempdir/bundle/LEGGIMI.html"
+convert_mds "$BASE_BUNDLE" "$tempdir/bundle/"
 mkdir "$tempdir/bundle/bin"
 cp "$BASE_BUNDLE/bin/" "$tempdir/bundle/bin"
 cp "$SCYTHE_HOME/bin/sf" "$tempdir/bundle/bin/.sf"

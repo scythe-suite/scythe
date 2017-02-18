@@ -32,6 +32,18 @@ export REMOTE_ENDPOINT="http://$SCYTHE_SERVER/tm/$SCYTHE_TEACHER_ID/$SCYTHE_EXAM
 # functions
 
 suite_latest_version() {
-	last_release_url=$(curl -sLo /dev/null -w '%{url_effective}' "https://github.com/scythe-suite/$1/releases/latest")
+	local last_release_url=$(curl -sLo /dev/null -w '%{url_effective}' "https://github.com/scythe-suite/$1/releases/latest")
 	echo "${last_release_url##*/}"
+}
+
+convert_mds() {
+	local src_dir="$1"
+	local dst_dir="$2"
+	local name
+
+	for doc in "$src_dir"/*.md; do
+		name="${doc##*/}"
+		name="${name%.md}"
+		md2html "$doc" "$name" "$dst_dir/${name}.html"
+	done
 }
