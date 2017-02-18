@@ -21,7 +21,7 @@ echo3 "Adding readme and bins"
 
 md2html "$BASE_BUNDLE/LEGGIMI.md" LEGGIMI "$tempdir/bundle/LEGGIMI.html"
 mkdir "$tempdir/bundle/bin"
-cp "$BASE_BUNDLE/bin/"{consegna,identifica,aggiorna,soluzione,verifica,pulisci} "$tempdir/bundle/bin"
+cp "$BASE_BUNDLE/bin/" "$tempdir/bundle/bin"
 cp "$SCYTHE_HOME/bin/sf" "$tempdir/bundle/bin/.sf"
 
 echo3 "Fixing perms"
