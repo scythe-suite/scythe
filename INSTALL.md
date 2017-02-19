@@ -2,8 +2,9 @@
 
 Create an empty dir that we'll be the **base dir**, download and unpack the
 [latest release](https://github.com/scythe-suite/scythe/releases/latest) of the
-`scythe.tgz`, `exercises.tgz`, and `confs.tgz` archives; you can accomplish such
-task manually, or just executing the following command in the shell
+`scythe.tgz`, `exercises.tgz`, `confs.tgz`, and `harvests.tgz` archives; you can
+accomplish such task manually, or just executing the following command in the
+shell
 
     curl -sL https://git.io/install-scythe | bash
 
@@ -45,12 +46,17 @@ The unzipped example configuration and exercises should allow a simple test: run
 
     source ./setenv.sh
     scythe prepare example
+    scythe test example
+    scythe view example
 
-this should generate `./confs/example.py`, the configuration file required for
-all the next steps.
+this should generate `./confs/example.py` and `./confs/example-r.py`, the
+configuration files, then run the test on the example harvets and finally view
+the results. This steps do not involve the external server and should work
+correctly even if the Scythe server has not been configured.
+
 
 ## Save your work!
 
 If you want to edit and keep track of your configuration and exercises you are
 suggested to turn `confs` and `exercises` into git repositories (after removing
-the example exam configuration and exercises).
+the example exam configuration, exercises, and harvests).

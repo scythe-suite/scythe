@@ -5,3 +5,4 @@ rm -rf ./release/*.tgz
 tar zcvf ./release/scythe.tgz setenv.sh scythe
 (cd example && tar zcvf ../release/confs.tgz confs)
 (cd example && tar zcvf ../release/exercises.tgz exercises)
+(cd example && tar zcvf ../release/harvests.tgz harvests)
