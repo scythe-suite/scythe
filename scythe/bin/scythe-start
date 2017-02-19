@@ -6,7 +6,7 @@ ssh "$SCYTHE_USER@$SCYTHE_SERVER" "start $SCYTHE_EXAM_ID"
 
 echo2 "Checking local and remote version configuration hash"
 
-tm hashconf "$TM_SETTINGS"
+tm hashconf "$TM_SETTINGS_SERVER"
 sleep 1
 curl -s "$REMOTE_ENDPOINT" && echo
 

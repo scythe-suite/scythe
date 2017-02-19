@@ -30,15 +30,21 @@ source "$SCYTHE_HOME/confs.sh"
 case "$command" in
 	upgrade|versions)
 	;;
-	prepare)
+	edit|prepare)
 		if [ ! -r "$EXERCISES" ]; then
 		    echo "scythe: exercises list '$EXERCISES' not readable!" >&2
 		    exit 1
 		 fi
 	;;
-	*)
-		if [ ! -r "$TM_SETTINGS" ]; then
-			echo "scythe: configuration '$TM_SETTINGS' not readable!" >&2
+	get|logtail|push|start|status|stop)
+		if [ ! -r "$TM_SETTINGS_SERVER" ]; then
+			echo "scythe: configuration '$TM_SETTINGS_SERVER' not readable!" >&2
+			exit 1
+		fi
+	;;
+	test|view)
+		if [ ! -r "$TM_SETTINGS_LOCAL" ]; then
+			echo "scythe: configuration '$TM_SETTINGS_LOCAL' not readable!" >&2
 			exit 1
 		fi
 esac

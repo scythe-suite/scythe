@@ -1,6 +1,6 @@
 echo1 "Preparing configuration"
 
-tempdir=$(mktemp -d /tmp/sf-XXXXXXXXX) || exit 1
+tempdir=$(mktemp -d /tmp/scythe-XXXXXXXXXXXX) || exit 1
 
 echo2 "Preparing TM tar directoroy"
 
@@ -20,8 +20,7 @@ done
 echo3 "Adding markdowns and bins"
 
 convert_mds "$BASE_BUNDLE" "$tempdir/bundle/"
-mkdir "$tempdir/bundle/bin"
-cp "$BASE_BUNDLE/bin/" "$tempdir/bundle/bin"
+cp -r "$BASE_BUNDLE/bin" "$tempdir/bundle/bin"
 cp "$SCYTHE_HOME/bin/sf" "$tempdir/bundle/bin/.sf"
 
 echo3 "Fixing perms"
@@ -35,9 +34,9 @@ echo2 "Generating the TM configuration file (base + tar + uids)"
 secret=$(head -n 1 "$EXERCISES")
 if [ -z "$secret" ]; then
 	secret=$(python -c 'import uuid; print uuid.uuid4()')
-	echo3 "generated new secret $secret"
+	echo3 "Generated new secret $secret"
 else
-	echo3 "using secret $secret"
+	echo3 "Using secret $secret"
 fi
 
 cat > "$tempdir/conf.py" <<EOF
@@ -56,12 +55,17 @@ export PATH="\$HOME/bin:\$PATH"
 """
 EOF
 
-echo3 "adding test account with UID set to 000000"
+echo3 "Adding test account with UID set to '000000'"
 
 (echo -e '000000\tTEST ACCOUNT'; cat "$REGISTERED_UIDS") > "$tempdir/registered_uids.tsv"
 
-filter='^(bin/.*|LEGGIMI\.html|[0-9]+-.+/(Testo\.html|((input|expected|args)-[0-9]+)\.txt))$'
-tm mkconf -vf "$filter" -b "$tempdir/conf.py" -r "$tempdir/registered_uids.tsv" "$tempdir/bundle" "$TM_SETTINGS"
+echo3 "Creting server configuration"
+filter='^(bin/.*|.+\.html|[0-9]+-.+/(.+\.html|((input|expected|args)-[0-9]+)\.txt))$'
+tm mkconf -vf "$filter" -b "$tempdir/conf.py" -r "$tempdir/registered_uids.tsv" "$tempdir/bundle" "$TM_SETTINGS_SERVER"
+
+echo3 "Creting local configuration"
+filter='^[0-9]+-.+/(input|expected|args)-[0-9]+(t|)\.txt$'
+tm mkconf -vf "$filter" -b "$tempdir/conf.py" -r "$tempdir/registered_uids.tsv" "$tempdir/bundle" "$TM_SETTINGS_LOCAL"
 
 echo2 "Cleanup temp dir"
 

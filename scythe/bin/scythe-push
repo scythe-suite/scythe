@@ -1,3 +1,3 @@
 echo1 "Pushing exam conf to remote server '$SCYTHE_SERVER'"
 
-cat "$TM_SETTINGS" | ssh "$SCYTHE_USER@$SCYTHE_SERVER" "push $SCYTHE_EXAM_ID"
+cat "$TM_SETTINGS_SERVER" | ssh "$SCYTHE_USER@$SCYTHE_SERVER" "push $SCYTHE_EXAM_ID"

@@ -39,16 +39,16 @@ mkdir -p "$HARVEST"
 if [ -z "$SCYTHE_USE_SANDBOX" ]; then
     echo2 "Executing tests OUT OF THE SANDBOX and generating results"
     if [ -z "$restrict_path" ]; then
-        sf tmtest $clean_opt -c "$TM_SETTINGS" -u "$HARVEST/uploads" -r "$HARVEST/results.json"
+        sf tmtest $clean_opt -c "$TM_SETTINGS_LOCAL" -u "$HARVEST/uploads" -r "$HARVEST/results.json"
     else
-        sf tmtest $clean_opt -c "$TM_SETTINGS" -u "$HARVEST/uploads" -r "$HARVEST/results.json" -F "$restrict_path"
+        sf tmtest $clean_opt -c "$TM_SETTINGS_LOCAL" -u "$HARVEST/uploads" -r "$HARVEST/results.json" -F "$restrict_path"
     fi
 else
     echo2 "Executing tests and generating results"
     touch "$HARVEST/results.json" # this is to allow docker to mount it as a file
     if [ -z "$restrict_path" ]; then
-        docker run -it --rm -v "$HARVEST/uploads":/uploads -v "$TM_SETTINGS":/conf.py:ro -v "$HARVEST/results.json":/results.json scythe/tmtest $docker_cmd
+        docker run -it --rm -v "$HARVEST/uploads":/uploads -v "$TM_SETTINGS_LOCAL":/conf.py:ro -v "$HARVEST/results.json":/results.json scythe/tmtest $docker_cmd
     else
-        docker run -it --rm -v "$restrict_path":/uids.tsv:ro -v "$HARVEST/uploads":/uploads -v "$TM_SETTINGS":/conf.py:ro -v "$HARVEST/results.json":/results.json scythe/tmtest $docker_cmd
+        docker run -it --rm -v "$restrict_path":/uids.tsv:ro -v "$HARVEST/uploads":/uploads -v "$TM_SETTINGS_LOCAL":/conf.py:ro -v "$HARVEST/results.json":/results.json scythe/tmtest $docker_cmd
     fi
 fi
