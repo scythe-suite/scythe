@@ -54,8 +54,7 @@ configuration files, then run the test on the example harvets and finally view
 the results. This steps do not involve the external server and should work
 correctly even if the Scythe server has not been configured.
 
-
-## Save your work!
+## Save your work!
 
 If you want to edit and keep track of your configuration and exercises you are
 suggested to turn `confs` and `exercises` into git repositories (after removing
