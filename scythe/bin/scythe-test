@@ -1,4 +1,4 @@
-echo1 "Runnig the test cycle"
+echo1 "Running the test cycle"
 
 clean_opt='-n'
 restrict_path=''
