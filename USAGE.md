@@ -4,13 +4,14 @@
 
 First of all, design a few exercises and put them in the `exercises` dir.
 
-Then choose a name for your exam, say `myexam`, and add
+Then choose a name for your exam (the name must contain just *alphanumeric and
+underscore* characters), say `myexam`, and add
 
     ./confs/myexam.txt
     ./confs/myexam.tsv
 
 * the first file must contain, on the first line, a *secret* followed by a list
-  of exercise names (one execise per line), that is, names of directories in
+  of exercise names (one exercise per line), that is, names of directories in
   the `exercises` folder;
 
 * the second file must contain a tab-separated list of *unique ids*,
@@ -25,6 +26,17 @@ To prepare the configuration file, just run
 
 that will generate `./confs/myexam.py`: the configuration file required for all
 the next steps.
+
+### The basic bundle
+
+The `confs/basebunlde` directory contains a set of file that will be included in
+all the exam configurations (alongside the exercises and test cases); for
+example it can contain a README to help students during the exam and a set of
+simplified commands to test and upload their solutions.
+
+The `confs.tgz` contains a basic bundle for Java (and Shell) programming exams
+with an Italian README and a few support commands that can be a reasonable
+starting point for your own basic bundle.
 
 ## Run the exam
 
@@ -52,8 +64,9 @@ During the exam, or at the end of it, run
 
     scythe get myexam
 
-to copy the students uploads locally (under a suitable subdir of the `harvests`
-dir); once you have a local copy of the uploads, you can run the test with
+to copy the students uploads locally (under a suitable subdirectory of the
+`harvests` dir); once you have a local copy of the uploads, you can run the test
+with
 
     scythe test myexam
 

@@ -25,7 +25,10 @@ move `confs.sh-template` to `confs.sh`, then edit the first lines of such file
     export SCYTHE_USE_SANDBOX="<NOT_NULL_IF_DOCKER_IS_AVAILABLE>"
 
 to reflect your username, the credentials for the deploy site and whether to use
-[Docker](https://www.docker.com/) as a sandbox for running the tests.
+[Docker](https://www.docker.com/) as a sandbox for running the tests. Observe
+that you will probably need also to edit the files under `confs/basebundle` dir
+to reflect your local exam setup (i.e., the README files, the support
+commands…).
 
 You are ready to install the various dependencies (this must be done the first
 time you use the tool, or when an update of any of the dependencies is issued):
