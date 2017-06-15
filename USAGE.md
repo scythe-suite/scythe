@@ -27,7 +27,7 @@ To prepare the configuration file, just run
 that will generate `./confs/myexam.py`: the configuration file required for all
 the next steps.
 
-### The basic bundle
+### The basic bundle
 
 The `confs/basebunlde` directory contains a set of file that will be included in
 all the exam configurations (alongside the exercises and test cases); for
@@ -38,7 +38,7 @@ The `confs.tgz` contains a basic bundle for Java (and Shell) programming exams
 with an Italian README and a few support commands that can be a reasonable
 starting point for your own basic bundle.
 
-## Run the exam
+## Run the exam
 
 Now you can push the configuration to the remote server and start it with
 
