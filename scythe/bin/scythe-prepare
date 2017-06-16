@@ -13,6 +13,7 @@ for e in $(tail -n +2 "$EXERCISES"); do
 	dst=$(printf '%s/bundle/%02d-%s' "$tempdir" $n "$e")
 	mkdir "$dst"
 	convert_mds "$EXERCISES_DIR/$e" "$dst"
+	cp "$EXERCISES_DIR/$e/"*.md "$dst/"
 	sf generate -t 2 -fs "$EXERCISES_DIR/$e" -e "$dst"
 	n=$(( n + 1 ))
 done
@@ -64,7 +65,7 @@ filter='^(bin/.*|.+\.html|[0-9]+-.+/(.+\.html|((input|expected|args)-[0-9]+)\.tx
 tm mkconf -vf "$filter" -b "$tempdir/conf.py" -r "$tempdir/registered_uids.tsv" "$tempdir/bundle" "$TM_SETTINGS_SERVER"
 
 echo3 "Creting local configuration"
-filter='^[0-9]+-.+/(input|expected|args)-[0-9]+(t|)\.txt$'
+filter='^[0-9]+-.+/(.+\.md|((input|expected|args)-[0-9]+(t|))\.txt)$'
 tm mkconf -vf "$filter" -b "$tempdir/conf.py" -r "$tempdir/registered_uids.tsv" "$tempdir/bundle" "$TM_SETTINGS_LOCAL"
 
 echo2 "Cleanup temp dir"
