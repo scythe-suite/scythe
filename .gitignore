@@ -12,3 +12,4 @@
 /.envrc
 /release
 *.class
+*.pyc
