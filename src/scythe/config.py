@@ -55,4 +55,3 @@ def toredis(path, session_id):
 
 if __name__ == '__main__':
     toredis('confs/170613-t.py','170613')
-    print cases('170613', '01-parole_graziose')
