@@ -1,8 +1,52 @@
-#!/bin/bash
+#!/bin/bash -e
 
+echocol() { echo -e "\033[31m$@...\033[0m " >&2; }
+
+echocol "Setup dirs"
+
+tempdir=$(mktemp -d /tmp/sf-XXXXXXXXX) || exit 1
+
+mkdir -p $tempdir/dist
 mkdir -p ./release
 rm -rf ./release/*.tgz
+mkdir -p ./vendor
+
+echocol "Creating {scythe, confs, exercises, harvests}.tgz"
+
 tar --exclude .git -zcvf ./release/scythe.tgz setenv.sh scythe
 (cd example && tar zcvf ../release/confs.tgz confs)
 (cd example && tar zcvf ../release/exercises.tgz exercises)
 (cd example && tar zcvf ../release/harvests.tgz harvests)
+
+echocol "Vendorizing [begin]"
+
+if [ ! -r ./vendor/redis ]; then
+    echocol "Getting redis"
+    curl -sL https://github.com/andymccurdy/redis-py/archive/2.10.5.tar.gz | tar -C ./vendor --strip 1 --wildcards -zxvf - '*/redis'
+fi
+if [ ! -r ./vendor/rq ]; then
+    echocol "Getting rq"
+    curl -sL https://github.com/nvie/rq/archive/v0.8.0.tar.gz | tar -C ./vendor --strip 1 --wildcards -zxvf - '*/rq'
+fi
+
+echocol "Vendorizing [end]"
+
+echocol "Copying source files to dist"
+
+cp -rv ./src/{scythe,__main__.py} $tempdir/dist
+cp -rv ./vendor/* $tempdir/dist
+
+echocol "Compiling and removing source files"
+
+( cd $tempdir/dist; python -m compileall . )
+find $tempdir/dist -name \*.py -exec rm {} \;
+
+echocol "Preparing zip file"
+
+rm -f $(pwd)/release/scythe
+( cd $tempdir/dist;  zip -9r $tempdir/scythe.zip . )
+echo '#!/usr/bin/env python' > $(pwd)/release/scythe
+cat $tempdir/scythe.zip >> $(pwd)/release/scythe
+chmod u+rx $(pwd)/release/scythe
+
+rm -rf $tempdir
