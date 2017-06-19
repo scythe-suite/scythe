@@ -13,3 +13,4 @@
 /release
 *.class
 *.pyc
+vendor/
