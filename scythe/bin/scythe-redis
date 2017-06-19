@@ -1,0 +1,6 @@
+echo1 "Starting redis with data in '$REDIS_HARVEST'"
+
+mkdir -p "$REDIS_HARVEST"
+exec docker run -d -p 6379:6379 -v "$REDIS_HARVEST":/data --name redis redis:3.0-alpine redis-server --appendonly yes
+
+# redis-cli keys "*" | grep -v ^rq | xargs redis-cli del
