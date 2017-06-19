@@ -1,0 +1,16 @@
+echo1 "Starting redis and the test runner"
+
+mkdir -p "$REDIS_HARVEST"
+
+if docker ps -a --filter label=scythe=st | grep -q scythe-redis; then
+    echo2 "killing old instance..." $(docker rm -f scythe-redis) >&2
+fi
+did=$(docker run -l scythe=st -d -p 6379:6379 -v "$REDIS_HARVEST":/data --name scythe-redis --network=scythe redis:3.0-alpine redis-server --appendonly yes)
+echo "started container 'scythe-redis' data in '$REDIS_HARVEST' (docker id '$did')..." 2>&1
+
+if docker ps -a --filter label=scythe=st | grep -q scythe-testrunner; then
+    echo2 "killing old instance..." $(docker rm -f scythe-testrunner) >&2
+fi
+did=$(
+docker run -l scythe=st -d --network scythe -e SCYTHE_REDIS_URL=redis://scythe-redis --name scythe-testrunner scythe/testrunner)
+echo "started container 'scythe-testrunner' (docker id '$did')..." 2>&1

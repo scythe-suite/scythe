@@ -14,6 +14,11 @@ echo2 "Upgrading sim-fun-i $sim_fun_i_version"
 curl -sL https://github.com/scythe-suite/sim-fun-i/releases/download/$sim_fun_i_version/sf > "$SCYTHE_HOME/bin/sf"
 chmod u+x "$SCYTHE_HOME/bin/sf"
 
+scythe_tester_version=$(suite_latest_version scythe-tester)
+echo2 "Upgrading scythe-tester $scythe_tester_version"
+curl -sL https://github.com/scythe-suite/scythe-tester/releases/download/$scythe_tester_version/st > "$SCYTHE_HOME/bin/st"
+chmod u+x "$SCYTHE_HOME/bin/st"
+
 scythe_viewer_version=$(suite_latest_version scythe-viewer)
 echo2 "Upgrading scythe-viewer $scythe_viewer_version"
 curl -sL https://github.com/scythe-suite/scythe-viewer/releases/download/$scythe_viewer_version/sv > "$SCYTHE_HOME/bin/sv"
@@ -31,7 +36,8 @@ if [ ! -z $SCYTHE_USE_SANDBOX ]; then
     cp "$SCYTHE_HOME/Dockerfile" "$SCYTHE_HOME/../.docker"
     cp "$SCYTHE_HOME/bin/tm" "$SCYTHE_HOME/../.docker"
     cp "$SCYTHE_HOME/bin/sf" "$SCYTHE_HOME/../.docker"
+    cp "$SCYTHE_HOME/bin/st" "$SCYTHE_HOME/../.docker"
     cd "$SCYTHE_HOME/../.docker"
-    docker build --build-arg userid="$(id -u)" -t scythe/tmtest .
+    docker build --build-arg userid="$(id -u)" -t scythe/testrunner .
     ) >/dev/null
 fi
