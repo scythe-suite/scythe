@@ -1,6 +1,6 @@
 # current version
 
-export SCYTHE_VERSION=0.4.2
+export SCYTHE_VERSION=0.5.0
 
 # tool dirs
 
@@ -25,6 +25,7 @@ export TM_SETTINGS_SERVER="$CONFS_DIR/${SCYTHE_EXAM_ID}.py"
 export TM_SETTINGS_LOCAL="$CONFS_DIR/${SCYTHE_EXAM_ID}-t.py"
 
 export HARVEST="$HARVESTS_DIR/$SCYTHE_EXAM_ID"
+export REDIS_HARVEST="$HARVESTS_DIR/redis"
 
 # remote endpoint
 
