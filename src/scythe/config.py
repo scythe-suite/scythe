@@ -10,25 +10,27 @@ from . import redis, tar2tmpdir, rmrotree, LOGGER
 
 TEXTS_GLOB = '*.md'
 
-def cases(session_id, exercise):
-    cases_key = 'cases:{}'.format(session_id)
-    return TestCases.from_list_of_dicts(loads(redis.hget(cases_key, exercise)))
-
-def toredis(path, session_id):
+def add(path, session_id, clean = False):
 
     config = {}
     with open(path, 'r') as f: exec(f, config)
     LOGGER.info('Read session {} configuration'.format(session_id))
 
     uids_key = 'uids:{}'.format(session_id)
+    cases_key = 'cases:{}'.format(session_id)
+    texts_key = 'texts:{}'.format(session_id)
+
+    if clean:
+        LOGGER.info('Cleaning session {} configuration'.format(session_id))
+        redis.delete(uids_key)
+        redis.delete(cases_key)
+        redis.delete(texts_key)
+
     for uid, info in config['REGISTERED_UIDS'].items():
         redis.sadd(uids_key, dumps({'uid': uid, 'info': info, 'status': 'registered'}))
     LOGGER.info('Imported uids')
 
     temp_dir = tar2tmpdir(config['TAR_DATA'], decode = True)
-
-    cases_key = 'cases:{}'.format(session_id)
-    texts_key = 'texts:{}'.format(session_id)
 
     for exercise_path in glob(join(temp_dir, '*')):
 
@@ -52,6 +54,3 @@ def toredis(path, session_id):
             LOGGER.info('Imported texts for exercise {}'.format(exercise_name))
 
     rmrotree(temp_dir)
-
-if __name__ == '__main__':
-    toredis('confs/170613-t.py','170613')
