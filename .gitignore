@@ -1,16 +1,4 @@
 /local
-/confs
-/exercises
-/example/confs/confs.sh
-/example/confs/example.py
-/harvests
-/scythe/bin/md2html
-/scythe/bin/tm
-/scythe/bin/sf
-/scythe/bin/sv
 /.docker
-/.envrc
 /release
-*.class
 *.pyc
-vendor/
