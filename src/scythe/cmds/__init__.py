@@ -3,10 +3,9 @@ from os import environ
 import sys
 from traceback import format_exception_only
 
-
 from scythe import VERSION
 
-COMMANDS = 'import', 'scan', 'watch', 'rq'
+COMMANDS = 'import', 'scan', 'watch', 'rqcli', 'start'
 
 def main():
     if 'SCYTHE_DEBUG' not in environ:
