@@ -1,5 +1,8 @@
 # Installation instructions
 
+First of all, you'll need to install [Docker](https://www.docker.com/) (used as
+a sandbox for running the tests).
+
 Create an empty dir that we'll be the **base dir**, download and unpack the
 [latest release](https://github.com/scythe-suite/scythe/releases/latest) of the
 `scythe.tgz`, `exercises.tgz`, `confs.tgz`, and `harvests.tgz` archives; you can
@@ -22,13 +25,11 @@ move `confs.sh-template` to `confs.sh`, then edit the first lines of such file
     export SCYTHE_TEACHER_ID="<YOUR_NAME_HERE>"
     export SCYTHE_USER="<REMOTE_USER_HERE>"
     export SCYTHE_SERVER="<REMOTE_HOST_HERE>"
-    export SCYTHE_USE_SANDBOX="<NOT_NULL_IF_DOCKER_IS_AVAILABLE>"
 
-to reflect your username, the credentials for the deploy site and whether to use
-[Docker](https://www.docker.com/) as a sandbox for running the tests. Observe
+to reflect your username, and the credentials for the deploy site. Observe
 that you will probably need also to edit the files under `confs/basebundle` dir
-to reflect your local exam setup (i.e., the README files, the support
-commands…).
+to reflect your local exam setup (i.e., the `README` files, and the support
+commands under the `bin` subdirectory…).
 
 You are ready to install the various dependencies (this must be done the first
 time you use the tool, or when an update of any of the dependencies is issued):
@@ -40,8 +41,10 @@ this will download and install for you the latest releases of
 [scythe](https://github.com/scythe-suite/scythe),
 [tristo-mietitore](https://github.com/scythe-suite/tristo-mietitore),
 [sim-fun-i](https://github.com/scythe-suite/sim-fun-i),
+[scythe-tester](https://github.com/scythe-suite/scythe-tester),
 [scythe-viewer](https://github.com/scythe-suite/scythe-viewer),  and
-[md2html](https://github.com/scythe-suite/md2html).
+[md2html](https://github.com/scythe-suite/md2html); it will moreover pull the latest [scythe/rewebdis](https://hub.docker.com/r/scythe/rewebdis/) and
+[scythe/testrunner](https://hub.docker.com/r/scythe/testrunner/) Docker images.
 
 ## A simple test
 

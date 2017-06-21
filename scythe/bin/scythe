@@ -32,6 +32,12 @@ export SCYTHE_EXAM_ID
 shift
 source "$SCYTHE_HOME/confs.sh"
 
+
+if [ ${SCYTHE_USE_SANDBOX+x} ] && [ -z "$SCYTHE_USE_SANDBOX" ]; then
+	echo "scythe: now docker is required for scythe to work, remove empty SCYTHE_USE_SANDBOX from your confs"
+	exit 1
+fi
+
 case "$command" in
 	upgrade|versions)
 	;;
