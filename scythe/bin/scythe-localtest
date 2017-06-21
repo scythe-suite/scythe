@@ -1,0 +1,66 @@
+echo1 "Running the test cycle"
+
+clean_opt='-n'
+restrict_path=''
+while getopts ":scr:" opt; do
+  case $opt in
+    c)
+
+        clean_opt=''
+        ;;
+
+    s)
+
+        echo2 "Starting redis and the test runner"
+
+        mkdir -p "$REWEBDIS_HARVEST"
+
+        if docker ps -a --filter label=scythe=rewebdis | grep -q scythe-rewebdis; then
+            echo "killing old instance..." $(docker rm -f scythe-rewebdis) >&2
+        fi
+        did=$(docker run -l scythe=rewebdis -d -p 6379:6379 -p 7379:7379 -v "$REWEBDIS_HARVEST":/data --name scythe-rewebdis --network=scythe scythe/rewebdis:latest)
+        echo3 "started container 'scythe-rewebdis' data in '$REWEBDIS_HARVEST' (docker id '$did')..." 2>&1
+
+        if docker ps -a --filter label=scythe=testrunner | grep -q scythe-testrunner; then
+            echo "killing old instance..." $(docker rm -f scythe-testrunner) >&2
+        fi
+        did=$(docker run -l scythe=testrunner -d --network scythe -e SCYTHE_REDIS_URL=redis://scythe-rewebdis --name scythe-testrunner scythe/testrunner:latest)
+        echo3 "started container 'scythe-testrunner' (docker id '$did')..." 2>&1
+
+        echo2 "Importing the exam configuration in the testrunner"
+        st import -c "$TM_SETTINGS_LOCAL" -s "$SCYTHE_EXAM_ID"
+
+      ;;
+
+    r)
+
+      restrict_path="$(realpath $OPTARG)"
+      if [ ! -r "$restrict_path" ]; then
+        echo "scythe test: cannot read '$restrict_path' file." >&2
+        exit 1
+      fi
+      echo "WARNING: restricted UIDs is not yet implemented"
+
+      ;;
+
+    \?)
+      echo "scythe test: invalid option: -$OPTARG." >&2
+      exit 1
+      ;;
+    :)
+      echo "scythe test: option -$OPTARG requires an argument." >&2
+      exit 1
+      ;;
+  esac
+done
+
+if ! docker ps -a --filter label=scythe=rewebdis | grep -q scythe-rewebdis || ! docker ps -a --filter label=scythe=testrunner | grep -q scythe-testrunner; then
+    echo "scythe test: the testrunner is not running, reissue this command with -s to make it start"
+    return
+fi
+
+echo2 "Submitting harvests to the testrunner"
+st scan -H "$HARVEST" -s "$SCYTHE_EXAM_ID" $clean_opt
+
+echo2 "Tailing testrunner logs (press ^C to stop)"
+st logs -f
