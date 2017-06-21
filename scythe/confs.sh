@@ -4,9 +4,9 @@ export SCYTHE_VERSION=0.5.0
 
 # tool dirs
 
-export CONFS_DIR="$(realpath $SCYTHE_HOME/../confs)"
-export EXERCISES_DIR="$(realpath $SCYTHE_HOME/../exercises)"
-export HARVESTS_DIR="$(realpath $SCYTHE_HOME/../harvests)"
+export CONFS_DIR="$(realpath -eL $SCYTHE_HOME/../confs)"
+export EXERCISES_DIR="$(realpath -eL $SCYTHE_HOME/../exercises)"
+export HARVESTS_DIR="$(realpath -eL $SCYTHE_HOME/../harvests)"
 
 # user confs
 
@@ -25,7 +25,7 @@ export TM_SETTINGS_SERVER="$CONFS_DIR/${SCYTHE_EXAM_ID}.py"
 export TM_SETTINGS_LOCAL="$CONFS_DIR/${SCYTHE_EXAM_ID}-t.py"
 
 export HARVEST="$HARVESTS_DIR/$SCYTHE_EXAM_ID"
-export REDIS_HARVEST="$HARVESTS_DIR/redis"
+export REWEBDIS_HARVEST="$HARVESTS_DIR/rewebdis"
 
 # remote endpoint
 
