@@ -5,6 +5,7 @@ echo2 "From GitHub"
 echo "scythe: $(suite_latest_version scythe)"
 echo "sim-fun-i: $(suite_latest_version sim-fun-i)"
 echo "tristo-mietitore: $(suite_latest_version tristo-mietitore)"
+echo "scythe-tester: $(suite_latest_version scythe-tester)"
 echo "scythe-viewer: $(suite_latest_version scythe-viewer)"
 echo "md2html: $(suite_latest_version md2html)"
 
@@ -19,12 +20,13 @@ sf version
 echo3 tristo-mietitore
 tm version
 
-if [ ! -z "$SCYTHE_USE_SANDBOX" ]; then
-    echo2 "As reported by tools in the Docker image"
+echo3 scythe-tester
+st version
 
-    echo3 sim-fun-i
-    docker run --rm -it scythe/tmtest version
+echo2 "As reported by Docker images"
 
-    echo3 tristo-mietitore
-    docker run --rm -it --entrypoint /bin/tm scythe/tmtest version
-fi
+echo3 scythe/rewebdis
+echo $(docker image ls --format '{{.Tag}}' scythe/rewebdis)
+
+echo3 scythe/testrunner
+echo $(docker image ls --format '{{.Tag}}' scythe/testrunner)
