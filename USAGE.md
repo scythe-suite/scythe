@@ -65,8 +65,7 @@ During the exam, or at the end of it, run
     scythe get myexam
 
 to copy the students uploads locally (under a suitable subdirectory of the
-`harvests` dir); once you have a local copy of the uploads, you can run the test
-with
+`harvests` dir); once you have the harvest, you can run the test with
 
     scythe test myexam
 
