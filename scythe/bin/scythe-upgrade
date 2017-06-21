@@ -29,15 +29,8 @@ echo2 "Upgrading md2html $md2html_version"
 curl -sL https://github.com/scythe-suite/md2html/releases/download/$md2html_version/md2html > "$SCYTHE_HOME/bin/md2html"
 chmod u+x "$SCYTHE_HOME/bin/md2html"
 
-if [ ! -z $SCYTHE_USE_SANDBOX ]; then
-    echo2 "Creating 'scythe/tmtest' docker image"
-    (
-    mkdir -p "$SCYTHE_HOME/../.docker"
-    cp "$SCYTHE_HOME/Dockerfile" "$SCYTHE_HOME/../.docker"
-    cp "$SCYTHE_HOME/bin/tm" "$SCYTHE_HOME/../.docker"
-    cp "$SCYTHE_HOME/bin/sf" "$SCYTHE_HOME/../.docker"
-    cp "$SCYTHE_HOME/bin/st" "$SCYTHE_HOME/../.docker"
-    cd "$SCYTHE_HOME/../.docker"
-    docker build --build-arg userid="$(id -u)" -t scythe/testrunner .
-    ) >/dev/null
-fi
+echo2 "Upgrading scythe/rewebdis $scythe_tester_version"
+docker pull scythe/rewebdis:${scythe_tester_version#v}
+
+echo2 "Upgrading scythe/testrunner image $scythe_tester_version"
+docker pull scythe/testrunner:${scythe_tester_version#v}
