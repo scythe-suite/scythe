@@ -1,8 +1,7 @@
 echo1 "Running the test cycle"
 
 clean_opt='-n'
-restrict_path=''
-while getopts ":scr:" opt; do
+while getopts ":sc:" opt; do
   case $opt in
     c)
 
@@ -32,23 +31,12 @@ while getopts ":scr:" opt; do
 
       ;;
 
-    r)
-
-      restrict_path="$(realpath $OPTARG)"
-      if [ ! -r "$restrict_path" ]; then
-        echo "scythe test: cannot read '$restrict_path' file." >&2
-        exit 1
-      fi
-      echo "WARNING: restricted UIDs is not yet implemented"
-
-      ;;
-
     \?)
-      echo "scythe test: invalid option: -$OPTARG." >&2
+      echo "scythe: localtest: invalid option: -$OPTARG." >&2
       exit 1
       ;;
     :)
-      echo "scythe test: option -$OPTARG requires an argument." >&2
+      echo "scythe: localtest: option -$OPTARG requires an argument." >&2
       exit 1
       ;;
   esac
