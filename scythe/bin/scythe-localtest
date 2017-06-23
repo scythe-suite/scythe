@@ -1,7 +1,7 @@
 echo1 "Running the test cycle"
 
 clean_opt='-n'
-while getopts ":sc:" opt; do
+while getopts ":sc" opt; do
   case $opt in
     c)
 
@@ -12,13 +12,13 @@ while getopts ":sc:" opt; do
 
         echo2 "Starting redis and the test runner"
 
-        mkdir -p "$REWEBDIS_HARVEST"
+        mkdir -p "$REWEBDIS_DATA_DIR"
 
         if docker ps -a --filter label=scythe=rewebdis | grep -q scythe-rewebdis; then
             echo "killing old instance..." $(docker rm -f scythe-rewebdis) >&2
         fi
-        did=$(docker run -l scythe=rewebdis -d -p 6379:6379 -p 7379:7379 -v "$REWEBDIS_HARVEST":/data --name scythe-rewebdis --network=scythe scythe/rewebdis:latest)
-        echo3 "started container 'scythe-rewebdis' data in '$REWEBDIS_HARVEST' (docker id '$did')..." 2>&1
+        did=$(docker run -l scythe=rewebdis -d -p 6379:6379 -p 7379:7379 -v "$REWEBDIS_DATA_DIR":/data --name scythe-rewebdis --network=scythe scythe/rewebdis:latest)
+        echo3 "started container 'scythe-rewebdis' data in '$REWEBDIS_DATA_DIR' (docker id '$did')..." 2>&1
 
         if docker ps -a --filter label=scythe=testrunner | grep -q scythe-testrunner; then
             echo "killing old instance..." $(docker rm -f scythe-testrunner) >&2
@@ -27,7 +27,7 @@ while getopts ":sc:" opt; do
         echo3 "started container 'scythe-testrunner' (docker id '$did')..." 2>&1
 
         echo2 "Importing the exam configuration in the testrunner"
-        st import -c "$TM_SETTINGS_LOCAL" -s "$SCYTHE_EXAM_ID"
+        st configure -c "$TM_SETTINGS_LOCAL" -s "$SCYTHE_EXAM_ID"
 
       ;;
 
@@ -48,7 +48,7 @@ if ! docker ps -a --filter label=scythe=rewebdis | grep -q scythe-rewebdis || ! 
 fi
 
 echo2 "Submitting harvests to the testrunner"
-st scan -H "$HARVEST" -s "$SCYTHE_EXAM_ID" $clean_opt
+st stage -H "$HARVESTS_DIR" -s "$SCYTHE_EXAM_ID" $clean_opt
 
 echo2 "Tailing testrunner logs (press ^C to stop)"
 st logs -f
