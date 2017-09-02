@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -e
 
 echo1() { echo -e "\033[34m*** $@...\033[0m"; }
 echo2() { echo -e "\033[31m** $@...\033[0m"; }
@@ -19,7 +19,7 @@ if [ ! -r "$SCYTHE_CMD" ]; then
 	echo "scythe: command '$command' not found!" >&2
 	exit 1
 fi
-shift
+shift || true
 if [ -z "$SCYTHE_EXAM_ID" ]; then
 	SCYTHE_EXAM_ID="$1"
 fi
@@ -29,7 +29,7 @@ if  [[ ! "$SCYTHE_EXAM_ID" =~ ^[_[:alpha:][:digit:]]*$ ]]; then
 fi
 
 export SCYTHE_EXAM_ID
-shift
+shift || true
 source "$SCYTHE_HOME/confs.sh"
 
 
