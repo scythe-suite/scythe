@@ -1,7 +1,7 @@
 echo1 "Running the test cycle"
 
 clean_opt='-n'
-while getopts ":sc" opt; do
+while getopts ":sci" opt; do
   case $opt in
     c)
 
@@ -29,16 +29,24 @@ while getopts ":sc" opt; do
         echo2 "Importing the exam configuration in the testrunner"
         st configure -c "$TM_SETTINGS_LOCAL" -s "$SCYTHE_EXAM_ID"
 
-      ;;
+        ;;
+
+    i)
+
+        echo2 "Importing the exam configuration in the testrunner"
+        st configure -c "$TM_SETTINGS_LOCAL" -s "$SCYTHE_EXAM_ID"
+        ;;
 
     \?)
-      echo "scythe: localtest: invalid option: -$OPTARG." >&2
-      exit 1
-      ;;
+        echo "scythe: localtest: invalid option: -$OPTARG." >&2
+        exit 1
+        ;;
+
     :)
-      echo "scythe: localtest: option -$OPTARG requires an argument." >&2
-      exit 1
-      ;;
+        echo "scythe: localtest: option -$OPTARG requires an argument." >&2
+        exit 1
+        ;;
+
   esac
 done
 
