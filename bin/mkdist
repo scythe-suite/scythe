@@ -9,7 +9,7 @@ rm -rf ./release/*.tgz
 
 echocol "Creating {scythe, confs, exercises, harvests}.tgz"
 
-tar --exclude .git -zcvf ./release/scythe.tgz setenv.sh scythe
+tar zcvf ./release/scythe.tgz setenv.sh scythe
 (cd example && tar zcvf ../release/confs.tgz confs)
 (cd example && tar zcvf ../release/exercises.tgz exercises)
 (cd example && tar zcvf ../release/harvests.tgz harvests)
