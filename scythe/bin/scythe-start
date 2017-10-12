@@ -14,6 +14,6 @@ if [ ! -z "$SCYTHE_USE_SANDBOX" ]; then
 
 echo2 "Attempting signing as the test account"
 
-docker run --rm -it --entrypoint sh scythe/tmtest -c "export HOME=/home/tmuser/test; eval \$( python -c 'from urllib2 import urlopen; exec urlopen( \"$REMOTE_ENDPOINT/000000\" ).read()' ) && cd /home/tmuser/test && find"
+docker run --rm -it --entrypoint sh scythe/testrunner -c "mkdir /tmp/test && export HOME=/tmp/test; eval \$( python -c 'from urllib2 import urlopen; exec urlopen( \"$REMOTE_ENDPOINT/000000\" ).read()' ) && cd /tmp/test && find"
 
 fi
