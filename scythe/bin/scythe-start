@@ -2,7 +2,7 @@ echo1 "Starting tm on remote server '$SCYTHE_SERVER'"
 
 echo2 "Exexuting remote start"
 
-ssh "$SCYTHE_USER@$SCYTHE_SERVER" "start $SCYTHE_EXAM_ID"
+ssh "$SCYTHE_USER@$SCYTHE_SERVER" "$SCYTHE_VERSION start $SCYTHE_EXAM_ID"
 
 echo2 "Checking local and remote version configuration hash"
 
