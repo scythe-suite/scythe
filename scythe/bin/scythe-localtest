@@ -23,7 +23,7 @@ while getopts ":sci" opt; do
         if docker ps -a --filter label=scythe=testrunner | grep -q scythe-testrunner; then
             echo "killing old instance..." $(docker rm -f scythe-testrunner) >&2
         fi
-        did=$(docker run -l scythe=testrunner -d --network scythe -e SCYTHE_REDIS_URL=redis://scythe-rewebdis --name scythe-testrunner scythe/testrunner:latest)
+        did=$(docker run -l scythe=testrunner -d --network scythe -e SCYTHE_REDIS_HOST=scythe-rewebdis --name scythe-testrunner scythe/testrunner:latest)
         echo3 "started container 'scythe-testrunner' (docker id '$did')..." 2>&1
 
         echo2 "Importing the exam configuration in the testrunner"
