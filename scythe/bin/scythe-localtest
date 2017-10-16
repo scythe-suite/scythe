@@ -27,14 +27,14 @@ while getopts ":sci" opt; do
         echo3 "started container 'scythe-testrunner' (docker id '$did')..." 2>&1
 
         echo2 "Importing the exam configuration in the testrunner"
-        st configure -c "$TM_SETTINGS_LOCAL" -s "$SCYTHE_EXAM_ID"
+        st configure -c "$ST_SETTINGS" -s "$SCYTHE_EXAM_ID"
 
         ;;
 
     i)
 
         echo2 "Importing the exam configuration in the testrunner"
-        st configure -c "$TM_SETTINGS_LOCAL" -s "$SCYTHE_EXAM_ID"
+        st configure -c "$ST_SETTINGS" -s "$SCYTHE_EXAM_ID"
         ;;
 
     \?)

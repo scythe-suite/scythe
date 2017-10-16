@@ -48,14 +48,14 @@ case "$command" in
 		 fi
 	;;
 	get|logtail|push|start|status|stop)
-		if [ ! -r "$TM_SETTINGS_SERVER" ]; then
-			echo "scythe: configuration '$TM_SETTINGS_SERVER' not readable!" >&2
+		if [ ! -r "$TM_SETTINGS" ]; then
+			echo "scythe: configuration '$TM_SETTINGS' not readable!" >&2
 			exit 1
 		fi
 	;;
 	test|view)
-		if [ ! -r "$TM_SETTINGS_LOCAL" ]; then
-			echo "scythe: configuration '$TM_SETTINGS_LOCAL' not readable!" >&2
+		if [ ! -r "$ST_SETTINGS" ]; then
+			echo "scythe: configuration '$ST_SETTINGS' not readable!" >&2
 			exit 1
 		fi
 esac

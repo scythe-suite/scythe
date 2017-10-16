@@ -64,11 +64,11 @@ echo3 "Adding test account with UID set to '000000'"
 
 echo3 "Creting server configuration"
 filter='^(bin/.*|.+\.html|[0-9]+-.+/(.+\.html|((input|expected|args)-[0-9]+)\.txt))$'
-tm mkconf -vf "$filter" -b "$tempdir/conf.py" -r "$tempdir/registered_uids.tsv" "$tempdir/bundle" "$TM_SETTINGS_SERVER"
+tm mkconf -vf "$filter" -b "$tempdir/conf.py" -r "$tempdir/registered_uids.tsv" "$tempdir/bundle" "$TM_SETTINGS"
 
 echo3 "Creting local configuration"
 filter='^[0-9]+-.+/(.+\.md|((input|expected|args)-[0-9]+(t|))\.txt)$'
-tm mkconf -vf "$filter" -b "$tempdir/conf.py" -r "$tempdir/registered_uids.tsv" "$tempdir/bundle" "$TM_SETTINGS_LOCAL"
+tm mkconf -vf "$filter" -b "$tempdir/conf.py" -r "$tempdir/registered_uids.tsv" "$tempdir/bundle" "$ST_SETTINGS"
 
 echo2 "Cleanup temp dir"
 
