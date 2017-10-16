@@ -22,11 +22,3 @@ tm version
 
 echo3 scythe-tester
 st version
-
-echo2 "As reported by Docker images"
-
-echo3 scythe/rewebdis
-echo $(docker image ls --format '{{.Tag}}' scythe/rewebdis)
-
-echo3 scythe/testrunner
-echo $(docker image ls --format '{{.Tag}}' scythe/testrunner)

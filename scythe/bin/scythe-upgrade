@@ -28,9 +28,3 @@ md2html_version=$(suite_latest_version md2html)
 echo2 "Upgrading md2html $md2html_version"
 curl -sL https://github.com/scythe-suite/md2html/releases/download/$md2html_version/md2html > "$SCYTHE_HOME/bin/md2html"
 chmod u+x "$SCYTHE_HOME/bin/md2html"
-
-echo2 "Upgrading scythe/rewebdis $scythe_tester_version"
-docker pull scythe/rewebdis:${scythe_tester_version#v}
-
-echo2 "Upgrading scythe/testrunner image $scythe_tester_version"
-docker pull scythe/testrunner:${scythe_tester_version#v}

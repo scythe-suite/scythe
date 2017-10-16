@@ -2,18 +2,10 @@ echo1 "Starting tm on remote server '$SCYTHE_SERVER'"
 
 echo2 "Exexuting remote start"
 
-ssh "$SCYTHE_USER@$SCYTHE_SERVER" "$SCYTHE_VERSION start $SCYTHE_EXAM_ID"
+ssh "$SCYTHE_USER@$SCYTHE_SERVER" "$SCYTHE_VERSION start $SCYTHE_SESSION_ID"
 
 echo2 "Checking local and remote version configuration hash"
 
 tm hashconf "$TM_SETTINGS"
 sleep 1
 curl -s "$REMOTE_ENDPOINT" && echo
-
-if [ ! -z "$SCYTHE_USE_SANDBOX" ]; then
-
-echo2 "Attempting signing as the test account"
-
-docker run --rm -it --entrypoint sh scythe/testrunner -c "mkdir /tmp/test && export HOME=/tmp/test; eval \$( python -c 'from urllib2 import urlopen; exec urlopen( \"$REMOTE_ENDPOINT/000000\" ).read()' ) && cd /tmp/test && find"
-
-fi

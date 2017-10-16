@@ -27,9 +27,9 @@ done
 echo2 "Extracting the last results"
 if [ ! -z "$restrict_path" ]; then
     echo3 "Will restrict UIDs to the one in '$restrict_path'."
-    st results -r "${HARVEST}.json" -s "$SCYTHE_EXAM_ID" -R "$restrict_path"
+    st results -r "${HARVEST}.json" -s "$SCYTHE_SESSION_ID" -R "$restrict_path"
 else
-    st results -r "${HARVEST}.json" -s "$SCYTHE_EXAM_ID"
+    st results -r "${HARVEST}.json" -s "$SCYTHE_SESSION_ID"
 fi
 
 
