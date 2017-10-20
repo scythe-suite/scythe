@@ -19,11 +19,6 @@ echo2 "Upgrading scythe-tester $scythe_tester_version"
 curl -sL https://github.com/scythe-suite/scythe-tester/releases/download/$scythe_tester_version/st > "$SCYTHE_HOME/bin/st"
 chmod u+x "$SCYTHE_HOME/bin/st"
 
-scythe_viewer_version=$(suite_latest_version scythe-viewer)
-echo2 "Upgrading scythe-viewer $scythe_viewer_version"
-curl -sL https://github.com/scythe-suite/scythe-viewer/releases/download/$scythe_viewer_version/sv > "$SCYTHE_HOME/bin/sv"
-chmod u+x "$SCYTHE_HOME/bin/sv"
-
 md2html_version=$(suite_latest_version md2html)
 echo2 "Upgrading md2html $md2html_version"
 curl -sL https://github.com/scythe-suite/md2html/releases/download/$md2html_version/md2html > "$SCYTHE_HOME/bin/md2html"

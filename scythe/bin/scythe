@@ -51,17 +51,12 @@ case "$command" in
 		    exit 1
 		 fi
 	;;
-	get|logtail|push|start|status|stop)
+	auth|backup|logtail|push|start|status|stop)
 		if [ ! -r "$TM_SETTINGS" ]; then
 			echo "scythe: configuration '$TM_SETTINGS' not readable!" >&2
 			exit 1
 		fi
 	;;
-	test|view)
-		if [ ! -r "$ST_SETTINGS" ]; then
-			echo "scythe: configuration '$ST_SETTINGS' not readable!" >&2
-			exit 1
-		fi
 esac
 
 source "$SCYTHE_CMD" "$@"

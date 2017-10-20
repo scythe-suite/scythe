@@ -1,0 +1,9 @@
+echo1 "Determining the dashboard URL"
+
+realms="$@"
+if [ -z "$realms" ]; then
+    echo "scythe: auth: please specify the realms (all, texts, cases, solutions, compilations, results)" >&2
+    return
+fi
+
+ssh "$SCYTHE_USER@$SCYTHE_SERVER" "$SCYTHE_VERSION auth $SCYTHE_SESSION_ID $realms"

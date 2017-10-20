@@ -1,13 +1,9 @@
 # Installation instructions
 
-First of all, you'll need to install [Docker](https://www.docker.com/) (used as
-a sandbox for running the tests).
-
 Create an empty dir that we'll be the **base dir**, download and unpack the
 [latest release](https://github.com/scythe-suite/scythe/releases/latest) of the
-`scythe.tgz`, `exercises.tgz`, `confs.tgz`, and `harvests.tgz` archives; you can
-accomplish such task manually, or just executing the following command in the
-shell
+`scythe.tgz`, `exercises.tgz`, `confs.tgz` archives; you can accomplish such
+task manually, or just executing the following command in the shell
 
     curl -sL https://git.io/install-scythe | bash
 
@@ -42,7 +38,6 @@ this will download and install for you the latest releases of
 [tristo-mietitore](https://github.com/scythe-suite/tristo-mietitore),
 [sim-fun-i](https://github.com/scythe-suite/sim-fun-i),
 [scythe-tester](https://github.com/scythe-suite/scythe-tester),
-[scythe-viewer](https://github.com/scythe-suite/scythe-viewer),  and
 [md2html](https://github.com/scythe-suite/md2html); it will moreover pull the latest [scythe/rewebdis](https://hub.docker.com/r/scythe/rewebdis/) and
 [scythe/testrunner](https://hub.docker.com/r/scythe/testrunner/) Docker images.
 
@@ -52,13 +47,10 @@ The unzipped example configuration and exercises should allow a simple test: run
 
     source ./setenv.sh
     scythe prepare example
-    scythe test example
-    scythe view example
 
-this should generate `./confs/example.py` and `./confs/example-r.py`, the
-configuration files, then run the test on the example harvets and finally view
-the results. This steps do not involve the external server and should work
-correctly even if the Scythe server has not been configured.
+this should generate `./confs/example-st.py` and `./confs/example-tm.py`, the
+configuration files; to run the other steps you'll need to have a
+`scythe-server` administrator to enable your account.
 
 ## Save your work!
 

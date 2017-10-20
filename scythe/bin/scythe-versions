@@ -6,7 +6,6 @@ echo "scythe: $(suite_latest_version scythe)"
 echo "sim-fun-i: $(suite_latest_version sim-fun-i)"
 echo "tristo-mietitore: $(suite_latest_version tristo-mietitore)"
 echo "scythe-tester: $(suite_latest_version scythe-tester)"
-echo "scythe-viewer: $(suite_latest_version scythe-viewer)"
 echo "md2html: $(suite_latest_version md2html)"
 
 echo2 "As reported by tools"

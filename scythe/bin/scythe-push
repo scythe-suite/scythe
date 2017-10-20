@@ -2,3 +2,7 @@ echo1 "Pushing exam conf to remote server '$SCYTHE_SERVER'"
 
 cat "$TM_SETTINGS" | ssh "$SCYTHE_USER@$SCYTHE_SERVER" "$SCYTHE_VERSION push-tm $SCYTHE_SESSION_ID"
 cat "$ST_SETTINGS" | ssh "$SCYTHE_USER@$SCYTHE_SERVER" "$SCYTHE_VERSION push-st $SCYTHE_SESSION_ID"
+
+echo2 "The public dashboard will be available at"
+
+ssh "$SCYTHE_USER@$SCYTHE_SERVER" "$SCYTHE_VERSION auth $SCYTHE_SESSION_ID all"

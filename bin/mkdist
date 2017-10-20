@@ -7,9 +7,8 @@ echocol "Setup dirs"
 mkdir -p ./release
 rm -rf ./release/*.tgz
 
-echocol "Creating {scythe, confs, exercises, harvests}.tgz"
+echocol "Creating {scythe, confs, exercises}.tgz"
 
 tar zcvf ./release/scythe.tgz setenv.sh scythe
 (cd example && tar zcvf ../release/confs.tgz confs)
 (cd example && tar zcvf ../release/exercises.tgz exercises)
-(cd example && tar zcvf ../release/harvests.tgz harvests)

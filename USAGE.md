@@ -58,26 +58,16 @@ During the exam you can run
 
 to peek at server logs.
 
-## Collect the student's work and evaluate it
+## Collect the student's work for backup purposes
 
 During the exam, or at the end of it, run
 
-    scythe get myexam
+    scythe backup myexam
 
 to copy the students uploads locally (under a suitable subdirectory of the
-`harvests` dir); once you have the harvest, you can run the test with
+`harvests` dir).
 
-    scythe test myexam
+## View the results
 
-and view the results with
-
-    scythe view myexam
-
-You can run these steps as many times as you want during the exam. The `test`
-subcommand supports two options:
-
-* `-c` to force a cleanup of previously compiled and executed tests,
-
-* `-r <UIDS_FILE>.tsv` to restrict the evaluation to a subset of UIDs (the given
-  file must have the same tab-separated format of the UIDs file used to prepare
-  the exam configuration).
+When you push your configurations, you'll be given a dashboard URL where you can
+watch the real-time evaluations.
