@@ -4,8 +4,6 @@ echo2 "Exexuting remote start"
 
 ssh "$SCYTHE_USER@$SCYTHE_SERVER" "$SCYTHE_VERSION start $SCYTHE_SESSION_ID"
 
-echo2 "Checking local and remote version configuration hash"
+echo2 "Reporting local configuration hash"
 
 tm hashconf "$TM_SETTINGS"
-sleep 1
-curl -s "$REMOTE_ENDPOINT" && echo

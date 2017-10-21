@@ -1,4 +1,4 @@
-echo1 "Getting harvest from remote server '$SCYTHE_SERVER'"
+echo1 "Backupping uploads and evaluations from remote server '$SCYTHE_SERVER'"
 
-mkdir -p "$HARVEST"
-rsync -e "ssh $SCYTHE_USER@$SCYTHE_SERVER $SCYTHE_VERSION get $SCYTHE_SESSION_ID" -zPav $SCYTHE_USER@$SCYTHE_SERVER:NOT_RELEVANT "${HARVEST}"
+mkdir -p "$SCYTHE_BACKUPS"
+rsync -e "ssh $SCYTHE_USER@$SCYTHE_SERVER $SCYTHE_VERSION backup $SCYTHE_SESSION_ID" -zPav $SCYTHE_USER@$SCYTHE_SERVER:NOT_RELEVANT "$SCYTHE_BACKUPS"

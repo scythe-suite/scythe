@@ -43,9 +43,6 @@ else
 fi
 
 cat > "$tempdir/conf.py" <<EOF
-UPLOAD_DIR = '/uploads'
-BASE_URL = '$REMOTE_ENDPOINT'
-
 SECRET_KEY = '$secret'
 MAX_CONTENT_LENGTH = 16 * 1024 * 1024
 LANG = 'it'

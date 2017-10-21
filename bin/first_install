@@ -7,4 +7,4 @@ for archive in scythe confs exercises; do
     echo "scythe: installing $archive"
     curl -sL $url/$archive.tgz | tar zxvf -
 done
-mkdir -p harvests
+mkdir -p backups

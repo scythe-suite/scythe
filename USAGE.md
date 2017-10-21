@@ -65,7 +65,7 @@ During the exam, or at the end of it, run
     scythe backup myexam
 
 to copy the students uploads locally (under a suitable subdirectory of the
-`harvests` dir).
+`backups` dir).
 
 ## View the results
 

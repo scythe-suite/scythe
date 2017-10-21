@@ -56,4 +56,4 @@ configuration files; to run the other steps you'll need to have a
 
 If you want to edit and keep track of your configuration and exercises you are
 suggested to turn `confs` and `exercises` into git repositories (after removing
-the example exam configuration, exercises, and harvests).
+the example exam configuration and exercises).

@@ -1,12 +1,12 @@
 # current version
 
-export SCYTHE_VERSION=0.6.0
+export SCYTHE_VERSION=0.6.1
 
 # tool dirs
 
 export CONFS_DIR="$(realpath -eL $SCYTHE_HOME/../confs)"
 export EXERCISES_DIR="$(realpath -eL $SCYTHE_HOME/../exercises)"
-export HARVESTS_DIR="$(realpath -eL $SCYTHE_HOME/../harvests)"
+export BACKUPS_DIR="$(realpath -eL $SCYTHE_HOME/../backups)"
 
 # user confs
 
@@ -24,12 +24,7 @@ export REGISTERED_UIDS="$CONFS_DIR/${SCYTHE_SESSION_ID}.tsv"
 export TM_SETTINGS="$CONFS_DIR/${SCYTHE_SESSION_ID}-tm.py"
 export ST_SETTINGS="$CONFS_DIR/${SCYTHE_SESSION_ID}-st.py"
 
-export HARVEST="$HARVESTS_DIR/$SCYTHE_SESSION_ID"
-export REWEBDIS_DATA_DIR="$HARVESTS_DIR/rewebdis"
-
-# remote endpoint
-
-export REMOTE_ENDPOINT="http://$SCYTHE_SERVER/tm/$SCYTHE_TESTER_ID/$SCYTHE_SESSION_ID/"
+export SCYTHE_BACKUPS="$BACKUPS_DIR/$SCYTHE_SESSION_ID"
 
 # functions
 
