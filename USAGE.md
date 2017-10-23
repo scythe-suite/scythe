@@ -70,4 +70,10 @@ to copy the students uploads locally (under a suitable subdirectory of the
 ## View the results
 
 When you push your configurations, you'll be given a dashboard URL where you can
-watch the real-time evaluations.
+watch the real-time evaluations (with no restrictions); omitting the token (the
+last part of the URL) will give you a private dashboard (where no details are
+shown, not even the uid infos); on the other hand, with
+
+    scythe auth myexam REALMS...
+
+you'll get a token for the specified realms.
