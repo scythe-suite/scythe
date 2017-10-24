@@ -15,8 +15,9 @@ required environment variables using
 Note that if you use [direnv](https://direnv.net/) just link `setenv.sh` to
 `.envrc` and direnv will take care of this step for you!
 
-Now setup your local configurations: go in the newly created `confs` dir and
-move `confs.sh-template` to `confs.sh`, then edit the first lines of such file
+Now setup your local configurations: go in the newly created `confs` dir,
+move `confs.sh-template` to `confs.sh` and move `confs.py-template` to `confs.py`,
+then edit the first lines of such file
 
     export SCYTHE_TESTER_ID="<YOUR_NAME_HERE>"
     export SCYTHE_USER="<REMOTE_USER_HERE>"

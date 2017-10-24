@@ -22,14 +22,19 @@ done
 
 echo3 "Adding markdowns and bins"
 
-convert_mds "$BASE_BUNDLE" "$tempdir/bundle/"
-cp -r "$BASE_BUNDLE/bin" "$tempdir/bundle/bin"
-cp "$SCYTHE_HOME/bin/sf" "$tempdir/bundle/bin/.sf"
+if ls "$BASE_BUNDLE"/*.md 2>/dev/null; then
+	convert_mds "$BASE_BUNDLE" "$tempdir/bundle/"
+fi
+if [ -d "$BASE_BUNDLE/bin" ]; then
+	cp -r "$BASE_BUNDLE/bin" "$tempdir/bundle/bin"
+fi
 
 echo3 "Fixing perms"
 
 chmod -R u+rX-w,go= "$tempdir/bundle"
-chmod -R u+rx "$tempdir/bundle/bin"
+if [ -d "$tempdir/bundle/bin" ]; then
+	chmod -R u+rx "$tempdir/bundle/bin"
+fi
 find "$tempdir/bundle" -name \*-\* -type d -exec chmod u+w {} \;
 
 echo2 "Generating the TM configuration file (base + tar + uids)"
@@ -42,18 +47,7 @@ else
 	echo3 "Using secret $secret"
 fi
 
-cat > "$tempdir/conf.py" <<EOF
-SECRET_KEY = '$secret'
-MAX_CONTENT_LENGTH = 16 * 1024 * 1024
-LANG = 'it'
-HOME = '\$HOME'
-
-CLIENT_PATH = '### home ###/bin/.tm'
-
-ENVIRONMENT_SETUP = """
-export PATH="\$HOME/bin:\$PATH"
-"""
-EOF
+(echo "SECRET_KEY = '$secret'"; cat "$CONFS_DIR/confs.py") > "$tempdir/conf.py"
 
 echo3 "Adding test account with UID set to '000000'"
 

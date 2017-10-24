@@ -1,0 +1,9 @@
+MAX_CONTENT_LENGTH = 16 * 1024 * 1024
+LANG = 'it'
+HOME = '$HOME'
+
+CLIENT_PATH = '### home ###/bin/.tm'
+
+ENVIRONMENT_SETUP = """
+export PATH="$HOME/bin:\$PATH"
+"""

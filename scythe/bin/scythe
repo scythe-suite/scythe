@@ -5,13 +5,13 @@ echo2() { echo -e "\033[31m** $@...\033[0m"; }
 echo3() { echo -e "\033[32m* $@...\033[0m"; }
 
 if [ -z "$SCYTHE_HOME" ]; then
-	echo "scythe: please set the required environment variables sourcing setenv.sh" 2>&1
+	echo "scythe: please set the required environment variables sourcing setenv.sh" >&2
 	exit 1
 fi
 
 command="$1"
 if [ -z "$command" ]; then
-	echo "scythe: available commands: $(ls -1 "$SCYTHE_HOME/bin/scythe-"* | sed 's/.*\/bin\/scythe-\(.*\)/\1/g' | paste -s -d' ' -)" 2>&1
+	echo "scythe: available commands: $(ls -1 "$SCYTHE_HOME/bin/scythe-"* | sed 's/.*\/bin\/scythe-\(.*\)/\1/g' | paste -s -d' ' -)" >&2
 	exit 1
 fi
 SCYTHE_CMD="$SCYTHE_HOME/bin/scythe-$command"
@@ -33,12 +33,12 @@ shift || true
 source "$SCYTHE_HOME/confs.sh"
 
 if [ ${SCYTHE_USE_SANDBOX+x} ]; then
-	echo "scythe: now docker is no more required for scythe to work, please remove empty SCYTHE_USE_SANDBOX from your confs"
+	echo "scythe: now docker is no more required for scythe to work, please remove empty SCYTHE_USE_SANDBOX from your confs" >&2
 	exit 1
 fi
 
-if [ -z "$SCYTHE_TESTER_ID" ]; then
-	echo "scythe: SCYTHE_TEACHER_ID is now deprecated, please edit your confs renaming such var in SCYTHE_TESTER_ID"
+if [ -z "$SCYTHE_TESTER_ID" ] || [ ${SCYTHE_TEACHER_ID+x} ]; then
+	echo "scythe: SCYTHE_TEACHER_ID is now deprecated, please edit your confs renaming such var in SCYTHE_TESTER_ID" >&2
 	exit 1
 fi
 
@@ -47,9 +47,13 @@ case "$command" in
 	;;
 	edit|prepare)
 		if [ ! -r "$EXERCISES" ]; then
-		    echo "scythe: exercises list '$EXERCISES' not readable!" >&2
-		    exit 1
-		 fi
+			echo "scythe: exercises list '$EXERCISES' not readable!" >&2
+			exit 1
+		fi
+		if [ ! -r "$CONFS_DIR/confs.py" ]; then
+			echo "scythe: base bundle configuration '$CONFS_DIR/confs.py' not readable!" >&2
+			exit 1
+		fi
 	;;
 	auth|backup|logtail|push|start|status|stop)
 		if [ ! -r "$TM_SETTINGS" ]; then
