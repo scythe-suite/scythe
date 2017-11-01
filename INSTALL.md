@@ -23,7 +23,9 @@ then edit the first lines of the first file
     export SCYTHE_USER="<REMOTE_USER_HERE>"
     export SCYTHE_SERVER="<REMOTE_HOST_HERE>"
 
-to reflect your username, and the credentials for the deploy site. Observe
+to reflect your username, and the credentials for the deploy site; the 
+
+Observe
 that you will probably need also to edit the files under `confs/basebundle` dir
 to reflect your local exam setup (i.e., the `README` files, and the support
 commands under the `bin` subdirectory…).
