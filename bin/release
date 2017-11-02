@@ -1,0 +1,7 @@
+#!/bin/bash
+
+unset rgit
+version=$(grep SCYTHE_VERSION ./scythe/confs.sh | cut -d= -f2)
+
+./bin/mkdist
+gh-release create scythe-suite/scythe v${version}
