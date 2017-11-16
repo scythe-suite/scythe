@@ -1,9 +1,14 @@
 echo1 "Starting tm on remote server '$SCYTHE_SERVER'"
 
-echo2 "Exexuting remote start"
-
-ssh "$SCYTHE_USER@$SCYTHE_SERVER" "$SCYTHE_VERSION start $SCYTHE_SESSION_ID"
-
-echo2 "Reporting local configuration hash"
+echo2 "Local configuration hash"
 
 tm hashconf "$TM_SETTINGS"
+
+echo2 "Pushing confs to remote server '$SCYTHE_SERVER' and starting containers"
+
+cat "$TM_SETTINGS" | ssh "$SCYTHE_USER@$SCYTHE_SERVER" "$SCYTHE_VERSION start-tm $SCYTHE_SESSION_ID"
+cat "$ST_SETTINGS" | ssh "$SCYTHE_USER@$SCYTHE_SERVER" "$SCYTHE_VERSION start-st $SCYTHE_SESSION_ID"
+
+echo2 "Public dashboard available at"
+
+ssh "$SCYTHE_USER@$SCYTHE_SERVER" "$SCYTHE_VERSION auth $SCYTHE_SESSION_ID all"

@@ -1,5 +1,0 @@
-echo1 "Warm restarting tm on remote server '$SCYTHE_SERVER'"
-
-echo2 "Exexuting remote warm restart"
-
-ssh "$SCYTHE_USER@$SCYTHE_SERVER" "$SCYTHE_VERSION restart $SCYTHE_SESSION_ID"
