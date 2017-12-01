@@ -56,11 +56,11 @@ echo3 "Adding test account with UID set to '000000'"
 
 (echo -e '000000\tTEST ACCOUNT'; cat "$REGISTERED_UIDS") > "$tempdir/registered_uids.tsv"
 
-echo3 "Creting student configuration"
+echo3 "Creating student configuration"
 filter='^(bin/.*|.+\.html|[0-9]+-.+/(.+\.html|TestRunner\.java|((input|expected|args)-[0-9]+)\.txt))$'
 tm mkconf -vf "$filter" -b "$tempdir/conf.py" -r "$tempdir/registered_uids.tsv" "$tempdir/bundle" "$TM_SETTINGS"
 
-echo3 "Creting tester configuration"
+echo3 "Creating tester configuration"
 filter='^[0-9]+-.+/(.+\.md|TestRunner\.java|((input|expected|args)-[0-9]+(t|))\.txt)$'
 tm mkconf -vf "$filter" -b "$tempdir/conf.py" -r "$tempdir/registered_uids.tsv" "$tempdir/bundle" "$ST_SETTINGS"
 
