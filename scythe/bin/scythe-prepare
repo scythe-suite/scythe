@@ -19,7 +19,7 @@ for e in $(tail -n +2 "$EXERCISES"); do
 	if [ -r "$EXERCISES_DIR/$e/"TestRunner.java ]; then
 		cp "$EXERCISES_DIR/$e/"TestRunner.java "$dst/"
 	fi
-	if sf generate -t 2 -fs "$EXERCISES_DIR/$e" -e "$dst"; then
+	if ! sf generate -t 2 -fs "$EXERCISES_DIR/$e" -e "$dst"; then
 		echo2 "Warning: solution has not been compiled"
 	fi
 	n=$(( n + 1 ))
