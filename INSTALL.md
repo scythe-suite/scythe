@@ -23,12 +23,15 @@ then edit the first lines of the first file
     export SCYTHE_USER="<REMOTE_USER_HERE>"
     export SCYTHE_SERVER="<REMOTE_HOST_HERE>"
 
-to reflect your username, and the credentials for the deploy site; the 
+to reflect your username, and the credentials for the deploy site; the
+`confs.py` file contains a some default used in the creation of
+[tristo-mietitore](https://github.com/scythe-suite/tristo-mietitore)
+configuration.
 
-Observe
-that you will probably need also to edit the files under `confs/basebundle` dir
-to reflect your local exam setup (i.e., the `README` files, and the support
-commands under the `bin` subdirectory…).
+
+Observe that you will probably need also to edit the files under
+`confs/basebundle` dir to reflect your local exam setup (i.e., the `README`
+files, and the support commands under the `bin` subdirectory…).
 
 You are ready to install the various dependencies (this must be done the first
 time you use the tool, or when an update of any of the dependencies is issued):
@@ -41,8 +44,7 @@ this will download and install for you the latest releases of
 [tristo-mietitore](https://github.com/scythe-suite/tristo-mietitore),
 [sim-fun-i](https://github.com/scythe-suite/sim-fun-i),
 [scythe-tester](https://github.com/scythe-suite/scythe-tester),
-[md2html](https://github.com/scythe-suite/md2html); it will moreover pull the latest [scythe/rewebdis](https://hub.docker.com/r/scythe/rewebdis/) and
-[scythe/testrunner](https://hub.docker.com/r/scythe/testrunner/) Docker images.
+[md2html](https://github.com/scythe-suite/md2html).
 
 ## A simple test
 
