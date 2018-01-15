@@ -5,5 +5,5 @@ HOME = '$HOME'
 CLIENT_PATH = '### home ###/bin/.tm'
 
 ENVIRONMENT_SETUP = """
-export PATH="$HOME/bin:\$PATH"
+export PATH="$HOME/bin:$PATH"
 """
