@@ -12,7 +12,9 @@ underscore* characters), say `myexam`, and add
 
 * the first file must contain, on the first line, a *secret* followed by a list
   of exercise names (one exercise per line), that is, names of directories in
-  the `exercises` folder;
+  the `exercises` folder; if the secret starts with `!!` the viewer will consider
+  this configuration *private* (meaning that summaries will not be visible wihtout
+  the suitable authentication token);
 
 * the second file must contain a tab-separated list of *unique ids*,
   and *last and first name* (exactly one tab per line, after the ids).
