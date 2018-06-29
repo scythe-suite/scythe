@@ -1,7 +1,29 @@
 #!/bin/bash
 
-unset rgit
-version=$(grep SCYTHE_VERSION= ./scythe/confs.sh | cut -d= -f2)
+version=v$(grep SCYTHE_VERSION= ./scythe/confs.sh | cut -d= -f2)
 
 ./bin/mkdist
-gh-release create scythe-suite/scythe v${version}
+
+git tag $version
+git push --tags
+
+github-release release \
+    --user scythe-suite \
+    --repo scythe \
+    --tag $version \
+    --name "$1" \
+    --description "$2" \
+
+for file in confs exercises scythe; do
+    github-release upload \
+        --user scythe-suite \
+        --repo scythe \
+        --tag $version \
+        --name ${file}.tgz \
+        --file ./release/${file}.tgz
+done
+
+github-release info \
+    --user scythe-suite \
+    --repo scythe \
+    --tag $version
