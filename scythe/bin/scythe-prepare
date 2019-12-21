@@ -46,7 +46,7 @@ echo2 "Generating the TM configuration file (base + tar + uids)"
 
 secret=$(head -n 1 "$EXERCISES")
 if [ -z "$secret" ]; then
-	secret=$(python -c 'import uuid; print uuid.uuid4()')
+	secret=$(python3 -c 'import uuid; print(uuid.uuid4())')
 	echo3 "Generated new secret $secret"
 else
 	echo3 "Using secret $secret"
