@@ -59,7 +59,7 @@ During the exam you can run
 
 to peek at server logs.
 
-## Collect the student's work for backup purposes
+## Collect the student's work for backup purposes
 
 During the exam, or at the end of it, run
 
