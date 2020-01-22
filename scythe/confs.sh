@@ -15,6 +15,9 @@ if [ ! -r "$CONFS_DIR/confs.sh" ]; then
 	exit 1
 fi
 source "$CONFS_DIR/confs.sh"
+if [ -z "$SCYTHE_EDITOR" ]; then
+	export SCYTHE_EDITOR="$EDITOR"
+fi
 
 # local dirs
 

@@ -1,0 +1,27 @@
+echo1 "Expanding the latest upload for a given UID"
+
+uid="$@"
+if [ -z "$uid" ]; then
+    echo "scythe: expand: please specify the (session and) uid" >&2
+    return
+fi
+
+latest=$(cd "$SCYTHE_BACKUPS"/"$uid" && ls -1 *.tar | sort -r | head -n 1)
+when=$(date -d "@${latest:0:10}")
+dest="$SCYTHE_BACKUPS"/"$uid"/latest
+
+echo2 "Found: $latest @ $when"
+
+echo2 "Expanding in $dest"
+
+replace=y
+if [ -d "$dest" ]; then
+  read -p "Replace previously expanded files (y/n)? " replace
+fi
+if [ "$replace" = y ] || [ "$replace" = Y ]; then
+  (rm -rf "$dest" && mkdir -p "$dest" && cd "$dest" && tar -xvf "$SCYTHE_BACKUPS"/"$uid"/"$latest")
+fi
+
+echo2 "Opening editor in $dest"
+
+$SCYTHE_EDITOR "$dest"
