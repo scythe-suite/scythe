@@ -33,12 +33,32 @@ configuration files required for all the next steps.
 
 The `confs/basebunlde` directory contains a set of file that will be included in
 all the exam configurations (alongside the exercises and test cases); for
-example it can contain a `README` to help students during the exam and a set of
-simplified commands to test and upload their solutions.
+example it can contain a `README` (in `.txt` or `.md` format) to help students
+during the exam and a set of simplified commands to test and upload their
+solutions.
 
 The `confs.tgz` contains a basic bundle for Java (and Shell) programming exams
 with an Italian `README` (named `LEGGIMI.md`) and a few support commands that
 can be a reasonable starting point for your own basic bundle.
+
+Markdown files will be converted to HTML before shipping. Other support files
+may be included provided they are in `.txt` or `.md` format and their name is
+made of alphanumeric characters.
+
+### What is included by `prepare`
+
+The `scythe prepare` creates two tar files to be, respectively,
+distributed to the student and used by [sim-fun-i](https://github.com/scythe-suite/sim-fun-i) to test the students solution.
+
+The tar are created by [tristo-mietitore](https://github.com/scythe-suite/tristo-mietitore) with the `mkconf` subcommand, having filter
+
+    ^(bin/.*|\w+\.html|\w+\.txt|([0-9]+-\w+/(\w+\.(html|txt)|TestRunner\.java|((input|expected|args)-[0-9]+)\.txt)))$
+
+for the student's tar, and filter
+
+    ^[0-9]+-.+/(.+\.md|TestRunner\.java|((input|expected|args)-[0-9]+(t|))\.txt)$
+
+for the testing tar.
 
 ## Run the exam
 
