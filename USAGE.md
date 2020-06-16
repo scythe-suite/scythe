@@ -52,7 +52,7 @@ distributed to the student and used by [sim-fun-i](https://github.com/scythe-sui
 
 The tar are created by [tristo-mietitore](https://github.com/scythe-suite/tristo-mietitore) with the `mkconf` subcommand, having filter
 
-    ^(bin/.*|\w+\.html|\w+\.txt|([0-9]+-\w+/(\w+\.(html|txt)|TestRunner\.java|((input|expected|args)-[0-9]+)\.txt)))$
+    ^(bin/.*|\w+\.html|\w+\.txt)|([0-9]+-\w+/(\w+\.(html|txt)|TestRunner\.java|((input|expected|args)-[0-9]+)\.txt))$
 
 for the student's tar, and filter
 
