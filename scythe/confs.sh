@@ -8,7 +8,17 @@ export CONFS_DIR="$(realpath -eL $SCYTHE_HOME/../confs)"
 export EXERCISES_DIR="$(realpath -eL $SCYTHE_HOME/../exercises)"
 export BACKUPS_DIR="$(realpath -eL $SCYTHE_HOME/../backups)"
 
-# user confs
+# local dirs
+
+export BASE_BUNDLE="$CONFS_DIR/basebundle"
+export EXERCISES="$CONFS_DIR/${SCYTHE_SESSION_ID}.txt"
+export REGISTERED_UIDS="$CONFS_DIR/${SCYTHE_SESSION_ID}.tsv"
+export TM_SETTINGS="$CONFS_DIR/${SCYTHE_SESSION_ID}-tm.py"
+export ST_SETTINGS="$CONFS_DIR/${SCYTHE_SESSION_ID}-st.py"
+
+export SCYTHE_BACKUPS="$BACKUPS_DIR/$SCYTHE_SESSION_ID"
+
+# user confs (here so that can override any of the above)
 
 if [ ! -r "$CONFS_DIR/confs.sh" ]; then
 	echo "scythe: missing user confs '$CONFS_DIR/confs.sh'" >&2
@@ -19,15 +29,6 @@ if [ -z "$SCYTHE_EDITOR" ]; then
 	export SCYTHE_EDITOR="$EDITOR"
 fi
 
-# local dirs
-
-export BASE_BUNDLE="$CONFS_DIR/basebundle"
-export EXERCISES="$CONFS_DIR/${SCYTHE_SESSION_ID}.txt"
-export REGISTERED_UIDS="$CONFS_DIR/${SCYTHE_SESSION_ID}.tsv"
-export TM_SETTINGS="$CONFS_DIR/${SCYTHE_SESSION_ID}-tm.py"
-export ST_SETTINGS="$CONFS_DIR/${SCYTHE_SESSION_ID}-st.py"
-
-export SCYTHE_BACKUPS="$BACKUPS_DIR/$SCYTHE_SESSION_ID"
 
 # functions
 
