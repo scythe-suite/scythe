@@ -37,8 +37,13 @@ if [ ${SCYTHE_USE_SANDBOX+x} ]; then
 	exit 1
 fi
 
-if [ -z "$SCYTHE_TESTER_ID" ] || [ ${SCYTHE_TEACHER_ID+x} ]; then
-	echo "scythe: SCYTHE_TEACHER_ID is now deprecated, please edit your confs renaming such var in SCYTHE_TESTER_ID" >&2
+if [ ${SCYTHE_TEACHER_ID+x} ]; then
+	echo "scythe: SCYTHE_TEACHER_ID is now deprecated, please remove it from your configs." >&2
+	exit 1
+fi
+
+if [ ${SCYTHE_TESTER_ID+x} ]; then
+	echo "scythe: SCYTHE_TESTER_ID is now deprecated, please remove it from your configs." >&2
 	exit 1
 fi
 
