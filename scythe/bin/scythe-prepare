@@ -8,12 +8,13 @@ echo2 "Preparing TM tar directoroy"
 
 echo3 "Adding exercises, making expected outputs"
 
-mkdir "$tempdir/bundle"
+mkdir "$tempdir/bundle" "$tempdir/src"
 n=1
 for e in $(tail -n +2 "$EXERCISES"); do
 	echo3 "$e"
 	dst=$(printf '%s/bundle/%02d-%s' "$tempdir" $n "$e")
-	mkdir "$dst"
+  src=$(printf '%s/src/%02d-%s' "$tempdir" $n "$e")
+	mkdir "$dst" "$src"
 	if ls "$EXERCISES_DIR/$e/"*.md >/dev/null 2>&1; then
 		convert_mds "$EXERCISES_DIR/$e" "$dst"
 		cp "$EXERCISES_DIR/$e/"*.md "$dst/"
@@ -21,10 +22,13 @@ for e in $(tail -n +2 "$EXERCISES"); do
 	if ls "$EXERCISES_DIR/$e/"*.txt >/dev/null 2>&1; then
 		cp "$EXERCISES_DIR/$e/"*.txt "$dst/"
 	fi
-	if [ -r "$EXERCISES_DIR/$e/"TestRunner.java ]; then
-		cp "$EXERCISES_DIR/$e/"TestRunner.java "$dst/"
+  for f in "$EXERCISES_DIR/$e/"*.java; do
+    sed '/package .*;/d' "$f" > "$src/$(basename $f)"
+  done
+	if [ -r "$src/"TestRunner.java ]; then
+		cp "$src/"TestRunner.java "$dst/"
 	fi
-	if ! sf generate -t 2 -fs "$EXERCISES_DIR/$e" -e "$dst"; then
+	if ! sf generate -t 2 -fs "$src" -e "$dst"; then
 		echo2 "Warning: solution has not been compiled"
 	fi
 	n=$(( n + 1 ))
@@ -76,4 +80,5 @@ tm mkconf -vf "$filter" -b "$tempdir/conf.py" -r "$tempdir/registered_uids.tsv" 
 
 echo2 "Cleanup temp dir"
 
-chmod -R u+rwx "$tempdir"; rm -rf "$tempdir"
+#chmod -R u+rwx "$tempdir"; rm -rf "$tempdir"
+echo $tempdir

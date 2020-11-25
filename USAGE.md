@@ -2,7 +2,10 @@
 
 ## Prepare the configuration
 
-First of all, design a few exercises and put them in the `exercises` dir.
+First of all, design a few exercises and put them in the `exercises` dir. In the
+case of Java sources, the exercises can be organized in packages, the `package`
+line will be removed before compiling (Java compilation and execution by the
+related tools assumes that everything is in the *default package*).
 
 Then choose a name for your exam (the name must contain just *alphanumeric and
 underscore* characters), say `myexam`, and add
@@ -13,7 +16,7 @@ underscore* characters), say `myexam`, and add
 * the first file must contain, on the first line, a *secret* followed by a list
   of exercise names (one exercise per line), that is, names of directories in
   the `exercises` folder; if the secret starts with `!!` the viewer will consider
-  this configuration *private* (meaning that summaries will not be visible wihtout
+  this configuration *private* (meaning that summaries will not be visible without
   the suitable authentication token);
 
 * the second file must contain a tab-separated list of *unique ids*,
