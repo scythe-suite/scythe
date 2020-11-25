@@ -13,7 +13,7 @@ n=1
 for e in $(tail -n +2 "$EXERCISES"); do
 	echo3 "$e"
 	dst=$(printf '%s/bundle/%02d-%s' "$tempdir" $n "$e")
-  src=$(printf '%s/src/%02d-%s' "$tempdir" $n "$e")
+	src=$(printf '%s/src/%02d-%s' "$tempdir" $n "$e")
 	mkdir "$dst" "$src"
 	if ls "$EXERCISES_DIR/$e/"*.md >/dev/null 2>&1; then
 		convert_mds "$EXERCISES_DIR/$e" "$dst"
@@ -22,13 +22,13 @@ for e in $(tail -n +2 "$EXERCISES"); do
 	if ls "$EXERCISES_DIR/$e/"*.txt >/dev/null 2>&1; then
 		cp "$EXERCISES_DIR/$e/"*.txt "$dst/"
 	fi
-  for f in "$EXERCISES_DIR/$e/"*.java; do
-    sed '/package .*;/d' "$f" > "$src/$(basename $f)"
-  done
+	for f in "$EXERCISES_DIR/$e/"*.java; do
+		sed '/package .*;/d' "$f" > "$src/$(basename $f)"
+	done
 	if [ -r "$src/"TestRunner.java ]; then
 		cp "$src/"TestRunner.java "$dst/"
 	fi
-	if ! sf generate -t 2 -fs "$src" -e "$dst"; then
+	if ! sf generate -t 2 -f -c "$EXERCISES_DIR/$e/" -s "$src" -e "$dst"; then
 		echo2 "Warning: solution has not been compiled"
 	fi
 	n=$(( n + 1 ))

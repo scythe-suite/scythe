@@ -1,6 +1,6 @@
 # current version
 
-export SCYTHE_VERSION=1.3.1
+export SCYTHE_VERSION=1.3.2
 
 # tool dirs
 
