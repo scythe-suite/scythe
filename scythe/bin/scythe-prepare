@@ -12,9 +12,13 @@ mkdir "$tempdir/bundle" "$tempdir/src"
 n=1
 for e in $(tail -n +2 "$EXERCISES"); do
 	echo3 "$e"
+
 	dst=$(printf '%s/bundle/%02d-%s' "$tempdir" $n "$e")
 	src=$(printf '%s/src/%02d-%s' "$tempdir" $n "$e")
 	mkdir "$dst" "$src"
+
+	# copy texts (possibly converted) to $dst
+
 	if ls "$EXERCISES_DIR/$e/"*.md >/dev/null 2>&1; then
 		convert_mds "$EXERCISES_DIR/$e" "$dst"
 		cp "$EXERCISES_DIR/$e/"*.md "$dst/"
@@ -22,15 +26,45 @@ for e in $(tail -n +2 "$EXERCISES"); do
 	if ls "$EXERCISES_DIR/$e/"*.txt >/dev/null 2>&1; then
 		cp "$EXERCISES_DIR/$e/"*.txt "$dst/"
 	fi
+
+	# copy testcases to $src
+
+	if ls "$EXERCISES_DIR/$e/"args-*.txt >/dev/null 2>&1; then
+		cp "$EXERCISES_DIR/$e/"args-*.txt "$src/"
+	fi
+	if ls "$EXERCISES_DIR/$e/"input-*.txt >/dev/null 2>&1; then
+		cp "$EXERCISES_DIR/$e/"input-*.txt "$src/"
+	fi
+	if [ -d "$EXERCISES_DIR/$e/testcases/" ]; then
+		cp "$EXERCISES_DIR/$e/testcases/"*.txt "$src/"
+	fi
+
+	# copy teacher solution sources to $src
+
+	if ls "$EXERCISES_DIR/$e/"*.c >/dev/null 2>&1; then
+		cp "$EXERCISES_DIR/$e/"*.c "$src/"
+	fi
+	if ls "$EXERCISES_DIR/$e/"*.sh >/dev/null 2>&1; then
+		cp "$EXERCISES_DIR/$e/"*.sh "$src/"
+	fi
 	for f in "$EXERCISES_DIR/$e/"*.java; do
+		# remove package delcaration
 		sed '/package .*;/d' "$f" > "$src/$(basename $f)"
 	done
-	if [ -r "$src/"TestRunner.java ]; then
-		cp "$src/"TestRunner.java "$dst/"
+
+	# copy test runners to $dst
+
+	if [ -r "$EXERCISES_DIR/$e/TestRunner.java" ]; then
+		# remove package delcaration
+		sed '/package .*;/d' "$EXERCISES_DIR/$e/TestRunner.java" > "$src/TestRunner.java"
 	fi
-	if ! sf generate -t 2 -f -c "$EXERCISES_DIR/$e/" -s "$src" -e "$dst"; then
+
+	# generate expected files
+
+	if ! sf generate -t 2 -f -c "$src" -s "$src" -e "$dst"; then
 		echo2 "Warning: solution has not been compiled"
 	fi
+
 	n=$(( n + 1 ))
 done
 
@@ -80,5 +114,4 @@ tm mkconf -vf "$filter" -b "$tempdir/conf.py" -r "$tempdir/registered_uids.tsv" 
 
 echo2 "Cleanup temp dir"
 
-#chmod -R u+rwx "$tempdir"; rm -rf "$tempdir"
-echo $tempdir
+chmod -R u+rwx "$tempdir"; rm -rf "$tempdir"
