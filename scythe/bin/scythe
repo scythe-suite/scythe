@@ -51,12 +51,20 @@ case "$command" in
 	upgrade|versions)
 	;;
 	edit|prepare)
-		if [ ! -r "$EXERCISES" ]; then
-			echo "scythe: exercises list '$EXERCISES' not readable!" >&2
+		if [ ! -d "$BASE_BUNDLE" ]; then
+			echo "scythe: base bundle dir '$BASE_BUNDLE' missing!" >&2
 			exit 1
 		fi
 		if [ ! -r "$CONFS_DIR/confs.py" ]; then
 			echo "scythe: base bundle configuration '$CONFS_DIR/confs.py' not readable!" >&2
+			exit 1
+		fi
+		if [ ! -r "$EXERCISES" ]; then
+			echo "scythe: exercises list '$EXERCISES' not readable!" >&2
+			exit 1
+		fi
+		if [ ! -r "$REGISTERED_UIDS" ]; then
+			echo "scythe: registered uids file '$REGISTERED_UIDS' not readable!" >&2
 			exit 1
 		fi
 	;;
