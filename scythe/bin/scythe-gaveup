@@ -1,0 +1,8 @@
+echo1 "List of users that gave up"
+
+echo
+grep "$REGISTERED_UIDS" -f <(for t in "$SCYTHE_BACKUPS"/*/*.tar; do
+  if tar tvf $t | grep -q gaveup; then
+    echo $t | rev | cut -d / -f 2 | rev
+  fi
+done)
