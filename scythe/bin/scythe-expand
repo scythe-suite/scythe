@@ -1,27 +1,43 @@
-echo1 "Expanding the latest upload for a given UID"
+echo1 "Expanding the latest upload for a given UID/INFO"
 
-uid="$@"
+uid="$1"
+noedit="$2"
+
 if [ -z "$uid" ]; then
-    echo "scythe: expand: please specify the (session and) uid" >&2
+    echo "scythe: expand: please specify the (session and) uid or info" >&2
     return
 fi
+if [ $(grep -i "$uid" "$REGISTERED_UIDS" | wc -l) -gt "1" ]; then
+    echo "scythe: expand: given uid/info corresponds to more than one registered uid" >&2
+    return
+fi
+if [ $(grep -i "$uid" "$REGISTERED_UIDS" | wc -l) -eq "0" ]; then
+    echo "scythe: expand: given uid/info not found in registered uids" >&2
+    return
+fi
+uid=$(grep -i "$uid" "$REGISTERED_UIDS" | cut -f1)
+info=$(grep -i "$uid" "$REGISTERED_UIDS" | cut -f2)
 
 latest=$(cd "$SCYTHE_BACKUPS"/"$uid" && ls -1 *.tar | sort -r | head -n 1)
 when=$(date -d "@${latest:0:10}")
 dest="$SCYTHE_BACKUPS"/"$uid"/latest
 
-echo2 "Found: $latest @ $when"
+echo2 "Found: $info ($uid) at $latest @ $when"
 
 echo2 "Expanding in $dest"
 
 replace=y
-if [ -d "$dest" ]; then
+if [ -z "$noedit" ] && [ -d "$dest" ]; then
   read -p "Replace previously expanded files (y/n)? " replace
 fi
-if [ "$replace" = y ] || [ "$replace" = Y ]; then
+if [ ! -z "$noedit" ] || [ "$replace" = y ] || [ "$replace" = Y ]; then
   (rm -rf "$dest" && mkdir -p "$dest" && cd "$dest" && tar -xvf "$SCYTHE_BACKUPS"/"$uid"/"$latest")
 fi
 
-echo2 "Opening editor in $dest"
+if [ -z "$noedit" ]; then
 
-$SCYTHE_EDITOR "$dest"
+  echo2 "Opening editor in $dest"
+
+  $SCYTHE_EDITOR "$dest"
+
+fi
