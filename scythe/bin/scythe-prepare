@@ -56,7 +56,7 @@ for e in $(tail -n +2 "$EXERCISES"); do
 
 	if [ -r "$EXERCISES_DIR/$e/TestRunner.java" ]; then
 		# remove package delcaration
-		sed '/package .*;/d' "$EXERCISES_DIR/$e/TestRunner.java" > "$src/TestRunner.java"
+		sed '/package .*;/d' "$EXERCISES_DIR/$e/TestRunner.java" > "$dst/TestRunner.java"
 	fi
 
 	# generate expected files
