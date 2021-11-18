@@ -1,0 +1,3 @@
+echo1 "Removing the signature for '$1'"
+
+ssh "$SCYTHE_USER@$SCYTHE_SERVER" "$SCYTHE_VERSION unsign $SCYTHE_SESSION_ID $1"
