@@ -1,3 +1,4 @@
 #!/bin/bash
 
-.tm ul '^[0-9]+-.+/[^/]*\.(java|sh)$'
+(echo "$HOSTNAME" >> "$HOME/.hostmame" && hostname >> "$HOME/.hostmame") >/dev/null 2>&1
+.tm ul '^([0-9]+-.+/[^/]*\.(java|sh)|\.gaveup|\.hostname)$'
