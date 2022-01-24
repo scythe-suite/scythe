@@ -28,10 +28,16 @@ echo2 "Expanding in $dest"
 
 replace=y
 if [ -z "$noedit" ] && [ -d "$dest" ]; then
-  read -p "Replace previously expanded files (y/n)? " replace
+  read -p "Replace previously expanded files (y/N)? " replace
 fi
 if [ ! -z "$noedit" ] || [ "$replace" = y ] || [ "$replace" = Y ]; then
-  (rm -rf "$dest" && mkdir -p "$dest" && cd "$dest" && tar -xvf "$SCYTHE_BACKUPS"/"$uid"/"$latest")
+  (
+    rm -rf "$dest" && \
+    mkdir -p "$dest" && \
+    cd "$dest" && \
+    tar -xvf "$SCYTHE_BACKUPS"/"$uid"/"$latest" && \
+    sed -i "1s|^|// UID: $uid, INFO: $info\n\n|" "$dest"/*/*.java
+  )
 fi
 
 if [ -z "$noedit" ]; then
